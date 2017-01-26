@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
     GoogleMap googleMap;
     MapView mapView;
+    TextView tvScroll;
     //variables globales
     private double latitud = 0, longitud =0;
+    private boolean firstTime = true;
 
 
     @Override
@@ -53,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
-
-        findViewById(R.id.textViewScroll).setSelected(true);
+        tvScroll = (TextView) findViewById(R.id.textViewScroll);
+        tvScroll.setSelected(true);
 
         googleMap = mapView.getMap();
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
+
                 double altitude = location.getAltitude(); //en metros
                 double latitude = location.getLatitude(); //en grados
                 double longitude = location.getLongitude(); //en grados
@@ -89,10 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 //guardamos las ultimas coordenadas en las que hemos estado
                 latitud = latitude;
                 longitud = longitude;
-                float zoomLevel = 16;
-                LatLng  tuLocation = new LatLng(latitud, longitud);
-                googleMap.addMarker(new MarkerOptions().position(tuLocation).title("Marker en tu posicion"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tuLocation, zoomLevel));
+
+                if(firstTime){
+                    float zoomLevel = 16;
+                    LatLng  tuLocation = new LatLng(latitud, longitud);
+                    googleMap.addMarker(new MarkerOptions().position(tuLocation).title("Marker en tu posicion"));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tuLocation, zoomLevel));
+                    firstTime = false;
+                }
+
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {
             }

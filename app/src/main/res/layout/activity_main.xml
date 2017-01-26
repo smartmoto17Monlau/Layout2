@@ -149,16 +149,18 @@
         android:background="#4c4d4e">
 
         <TextView
+
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="aaaaaaaaaaaaaaaaaaaafffffffffffffffffffffffffffffffffffffffffbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+            android:text="Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa    Temp: 20ºC   Humidity: 40%   Pressure: 100HPa"
             android:textSize="30dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit ="marquee_forever"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:scrollHorizontally="true"
-            android:maxLines="1"
+            android:singleLine="true"
             android:gravity="center"
             android:id="@+id/textViewScroll" />
 
