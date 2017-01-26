@@ -47,10 +47,12 @@
             android:layout_marginLeft="290dp"
             />
         <ImageButton
+            android:id="@+id/cambio"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:focusable="false"/>
 
 
     </LinearLayout>
@@ -151,10 +153,13 @@
         <TextView
 
             android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa    Temp: 20ºC   Humidity: 40%   Pressure: 100HPa"
+            android:layout_width="900dp"
+            android:layout_height="40dp"
+            android:text="Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa"
             android:textSize="30dp"
+
+
+
             android:ellipsize="marquee"
             android:marqueeRepeatLimit ="marquee_forever"
             android:focusable="true"
@@ -162,6 +167,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:gravity="center"
+
             android:id="@+id/textViewScroll" />
 
     </LinearLayout>

@@ -5,9 +5,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
 
+
 public class MainActivity extends AppCompatActivity {
 
     GoogleMap googleMap;
     MapView mapView;
     TextView tvScroll;
+    ImageButton cambiarActivity;
     //variables globales
     private double latitud = 0, longitud =0;
     private boolean firstTime = true;
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         tvScroll = (TextView) findViewById(R.id.textViewScroll);
+        cambiarActivity = (ImageButton) findViewById(R.id.cambio);
+
         tvScroll.setSelected(true);
 
         googleMap = mapView.getMap();
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         LatLng  tuLocation = new LatLng(latitud, longitud);
         googleMap.addMarker(new MarkerOptions().position(tuLocation).title("Marker en tu posicion"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tuLocation, zoomLevel));
+        listeners();
     }
 
 
@@ -124,5 +133,16 @@ public class MainActivity extends AppCompatActivity {
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
                 locationListener);
     } // fin de readGPS
+
+    private void listeners(){
+        cambiarActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 tvScroll.setText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+            }
+        });
+    }
+
 
 }
