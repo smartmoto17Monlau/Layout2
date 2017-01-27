@@ -27,10 +27,12 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    //declaracion widgets
     GoogleMap googleMap;
     MapView mapView;
-    TextView tvScroll;
+    TextView tvScroll,hora;
     ImageButton cambiarActivity;
+
     //variables globales
     private double latitud = 0, longitud =0;
     private boolean firstTime = true;
@@ -61,11 +63,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mapView = (MapView) findViewById(R.id.mapview);
-        mapView.onCreate(savedInstanceState);
-        tvScroll = (TextView) findViewById(R.id.textViewScroll);
-        cambiarActivity = (ImageButton) findViewById(R.id.cambio);
+        referencias();
 
+        mapView.onCreate(savedInstanceState);
         tvScroll.setSelected(true);
 
         googleMap = mapView.getMap();
@@ -89,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
         listeners();
     }
 
+    private void referencias(){
+        mapView = (MapView) findViewById(R.id.mapview);
+        tvScroll = (TextView) findViewById(R.id.textViewScroll);
+        cambiarActivity = (ImageButton) findViewById(R.id.cambio);
+        hora = (TextView) findViewById(R.id.textView);
+    }
 
     private void readGPS() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -135,12 +141,14 @@ public class MainActivity extends AppCompatActivity {
                 locationListener);
     } // fin de readGPS
 
+
+
+
     private void listeners(){
         cambiarActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 tvScroll.setText("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                System.out.println("");
+                // tvScroll.setText("Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa");
             }
         });
     }
