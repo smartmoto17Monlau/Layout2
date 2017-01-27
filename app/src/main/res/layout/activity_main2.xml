@@ -14,7 +14,7 @@
         android:id="@+id/cambio"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/arrow"
+        android:background="@drawable/arrow2"
         android:layout_marginLeft="10dp"
         android:focusable="false"/>
 
