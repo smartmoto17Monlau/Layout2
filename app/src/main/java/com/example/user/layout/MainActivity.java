@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     GoogleMap googleMap;
     MapView mapView;
     TextView tvScroll;
+    Typeface type;
     ImageButton cambiarActivity;
     TextClock clock;
 
@@ -68,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         referencias();
 
-
+        type = Typeface.createFromAsset(getAssets(),"fonts/Prototype.ttf");
+        tvScroll.setTypeface(type);
         mapView.onCreate(savedInstanceState);
         tvScroll.setSelected(true);
 
