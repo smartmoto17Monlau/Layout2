@@ -1,6 +1,7 @@
 package com.example.user.layout;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
     //declaracion widgets
     GoogleMap googleMap;
     MapView mapView;
-    TextView tvScroll,hora;
+    TextView tvScroll;
     ImageButton cambiarActivity;
+    TextClock clock;
 
     //variables globales
     private double latitud = 0, longitud =0;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         referencias();
 
+
         mapView.onCreate(savedInstanceState);
         tvScroll.setSelected(true);
 
@@ -93,7 +97,21 @@ public class MainActivity extends AppCompatActivity {
         mapView = (MapView) findViewById(R.id.mapview);
         tvScroll = (TextView) findViewById(R.id.textViewScroll);
         cambiarActivity = (ImageButton) findViewById(R.id.cambio);
-        hora = (TextView) findViewById(R.id.textView);
+
+    }
+
+    private void cambiarActivity(){
+        //creamos un intent que hace referencia al segundo activity
+        /*Intent intent2 = new Intent(MainActivity.this, Main2Activity.class);
+        try{
+            //enviamos datos al acivity 2
+            Bundle bundleColor = new Bundle();
+            bundleColor.putString("color", color);
+            intent2.putExtras(bundleColor);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        startActivity(intent2);*/
     }
 
     private void readGPS() {

@@ -20,22 +20,23 @@
         android:weightSum="20">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="match_parent"
             android:text="Conexion"
-            android:textSize="23dp"
+            android:textSize="20dp"
             android:background="#add47a"
             android:gravity="center"
             />
 
-        <TextView
+        <TextClock
+            android:id="@+id/textClock1"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:text="00:00"
-            android:textSize="23dp"
             android:gravity="center"
-            android:layout_marginLeft="300dp"
-            android:id="@+id/textView" />
+            android:layout_marginLeft="351dp"
+            android:textColor="#c2c2c2"
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="100dp"
@@ -44,14 +45,14 @@
             android:textSize="23dp"
             android:background="#cdd47a"
             android:gravity="center"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="239dp"
             />
         <ImageButton
             android:id="@+id/cambio"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:focusable="false"/>
 
 
