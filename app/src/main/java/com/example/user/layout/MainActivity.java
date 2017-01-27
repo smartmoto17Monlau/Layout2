@@ -102,16 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void cambiarActivity(){
         //creamos un intent que hace referencia al segundo activity
-        /*Intent intent2 = new Intent(MainActivity.this, Main2Activity.class);
-        try{
-            //enviamos datos al acivity 2
-            Bundle bundleColor = new Bundle();
-            bundleColor.putString("color", color);
-            intent2.putExtras(bundleColor);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        startActivity(intent2);*/
+        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+        startActivity(intent);
     }
 
     private void readGPS() {
@@ -167,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // tvScroll.setText("Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa");
+                cambiarActivity();
             }
         });
     }
