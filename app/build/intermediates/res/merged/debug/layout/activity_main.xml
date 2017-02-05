@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/darkGrey"
+    android:weightSum="100">
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/Topbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="20">
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:text="Conexion"
+            android:textSize="20dp"
+            android:background="#add47a"
+            android:gravity="center"
+            />
+
+        <TextClock
+            android:id="@+id/textClock1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="351dp"
+            android:textColor="#c2c2c2"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Luz"
+            android:textSize="23dp"
+            android:background="#cdd47a"
+            android:gravity="center"
+            android:layout_marginLeft="239dp"
+            />
+        <ImageButton
+            android:id="@+id/cambio"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/arrow"
+            android:layout_marginLeft="10dp"
+            android:focusable="false"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/center"
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:orientation="horizontal"
+        android:weightSum="50">>
+
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/info"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="50">
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/infoint2"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="50"
+                android:background="@drawable/border">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="100%"
+                    android:textSize="23dp"
+                    android:gravity="center"
+                    android:layout_marginRight="50dp"
+                    android:textColor="#2c2c2d"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:layout_width="790dp"
+            android:layout_height="410dp"
+            android:orientation="horizontal"
+            android:weightSum="50">
+
+            <com.google.android.gms.maps.MapView android:id="@+id/mapview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/info2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="50">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/info3"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="50"
+                android:background="@drawable/border2">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="100%"
+                    android:textSize="23dp"
+                    android:gravity="center"
+                    android:textColor="#2c2c2d"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/Botbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:background="#4c4d4e">
+
+        <TextView
+
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa"
+            android:textSize="30dp"
+
+
+
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:gravity="center"
+
+
+            android:id="@+id/textViewScroll" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
