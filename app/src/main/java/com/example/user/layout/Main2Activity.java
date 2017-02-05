@@ -22,7 +22,8 @@ public class Main2Activity extends AppCompatActivity {
 
     private void cambiarActivity(){
         //creamos un intent que hace referencia al segundo activity
-        Intent intent = new Intent(Main2Activity.this, MainActivity.class);
+        Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -41,5 +42,4 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
-
 }
