@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="sc-utils-1.2.7">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.paroca72/sc-utils/1.2.7/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.paroca72/sc-utils/1.2.7/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
