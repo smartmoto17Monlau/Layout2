@@ -1,15 +1,19 @@
 package com.example.user.layout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 
 public class Main3Activity extends AppCompatActivity {
 
-    Button main, map, options, exit;
+    ImageButton main, map, options, exit;
+    TextClock clock;
+    Typeface type;
 
 
     @Override
@@ -19,6 +23,9 @@ public class Main3Activity extends AppCompatActivity {
 
         referencias();
         listeners();
+
+          type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
+        clock.setTypeface(type);
     }
 
     private void cambiarMain(){
@@ -41,10 +48,11 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     private void referencias(){
-        main = (Button) findViewById(R.id.mainButton);
-        map = (Button) findViewById(R.id.mapButton);
-        options = (Button) findViewById(R.id.dataButton);
-        exit = (Button) findViewById(R.id.exitButton);
+        main = (ImageButton) findViewById(R.id.mainButton);
+        map = (ImageButton) findViewById(R.id.mapButton);
+        options = (ImageButton) findViewById(R.id.dataButton);
+        exit = (ImageButton) findViewById(R.id.exitButton);
+        clock =(TextClock) findViewById(R.id.textClock1);
 
     }
 
@@ -71,7 +79,8 @@ public class Main3Activity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
+                System.exit(0);
             }
         });
     }

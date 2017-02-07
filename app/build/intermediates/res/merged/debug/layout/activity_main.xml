@@ -19,40 +19,40 @@
         android:orientation="horizontal"
         android:weightSum="20">
 
-        <TextView
-            android:layout_width="85dp"
-            android:layout_height="match_parent"
-            android:text="Conexion"
-            android:textSize="20dp"
-            android:background="#add47a"
-            android:gravity="center"
-            />
+        <ImageButton
+        android:id="@+id/cambioIz"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/arrow2"
+        android:layout_marginLeft="15dp"
+        android:focusable="false"/>
+
+        <ImageButton
+            android:id="@+id/Menu"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:background="@drawable/homeicon"
+            android:layout_marginLeft="15dp"
+            android:focusable="false"/>
 
         <TextClock
             android:id="@+id/textClock1"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginLeft="351dp"
+            android:layout_marginLeft="285dp"
             android:textColor="#c2c2c2"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColorHighlight="@color/yelow"/>
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="Luz"
-            android:textSize="23dp"
-            android:background="#cdd47a"
-            android:gravity="center"
-            android:layout_marginLeft="239dp"
-            />
+
         <ImageButton
-            android:id="@+id/cambio"
+            android:id="@+id/cambioDe"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="355dp"
             android:focusable="false"/>
 
 
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="50"
-                android:background="@drawable/border">
+                android:background="@color/backgroundGrey">
 
                 <TextView
                     android:layout_width="100dp"
@@ -127,7 +127,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="50"
-                android:background="@drawable/border2">
+                android:background="@color/backgroundGrey">
 
                 <TextView
                     android:layout_width="100dp"
@@ -146,10 +146,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/Botbar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:background="#4c4d4e">
+        android:background="@color/darkGrey">
 
         <TextView
 
@@ -157,7 +157,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa"
-            android:textSize="30dp"
+            android:textSize="40dp"
 
 
 

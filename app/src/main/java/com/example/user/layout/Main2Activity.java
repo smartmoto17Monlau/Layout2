@@ -1,16 +1,21 @@
 package com.example.user.layout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextClock;
 
 
 public class Main2Activity extends AppCompatActivity {
 
     //variables globales
-    ImageButton cambiarActivity;
+    ImageButton menu, right, left;
+    TextClock clock;
+    Typeface type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +23,24 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         referencias();
         listeners();
+
+        type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
+        clock.setTypeface(type);
     }
 
-    private void cambiarActivity(){
+    private void cambiarRight(){
+        //creamos un intent que hace referencia al segundo activity
+        Intent intent = new Intent(Main2Activity.this, Main4Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    private void cambiarLeft(){
+        //creamos un intent que hace referencia al segundo activity
+        Intent intent = new Intent(Main2Activity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    private void cambiarMenu(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -28,17 +48,30 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private void referencias(){
-        cambiarActivity = (ImageButton) findViewById(R.id.cambio);
-
+        right = (ImageButton) findViewById(R.id.cambioDe);
+        left = (ImageButton) findViewById(R.id.cambioIz);
+        menu = (ImageButton) findViewById(R.id.Menu);
+        clock =(TextClock) findViewById(R.id.textClock1);
     }
 
 
     private void listeners(){
-        cambiarActivity.setOnClickListener(new View.OnClickListener() {
+        right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // tvScroll.setText("Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa");
-                cambiarActivity();
+                cambiarRight();
+            }
+        });
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarLeft();
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarMenu();
             }
         });
     }

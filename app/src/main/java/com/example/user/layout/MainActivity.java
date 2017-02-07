@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     MapView mapView;
     TextView tvScroll;
     Typeface type;
-    ImageButton cambiarActivity;
+    ImageButton menu, right, left;
+    TextClock clock;
 
     //variables globales
     private double latitud = 0, longitud =0;
@@ -66,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
         referencias();
 
-        type = Typeface.createFromAsset(getAssets(),"fonts/Prototype.ttf");
+        type = Typeface.createFromAsset(getAssets(),"fonts/GeosansLight.ttf");
         tvScroll.setTypeface(type);
+        type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
+        clock.setTypeface(type);
         mapView.onCreate(savedInstanceState);
         tvScroll.setSelected(true);
 
@@ -95,7 +99,11 @@ public class MainActivity extends AppCompatActivity {
     private void referencias(){
         mapView = (MapView) findViewById(R.id.mapview);
         tvScroll = (TextView) findViewById(R.id.textViewScroll);
-        cambiarActivity = (ImageButton) findViewById(R.id.cambio);
+        clock =(TextClock) findViewById(R.id.textClock1);
+        right = (ImageButton) findViewById(R.id.cambioDe);
+        left = (ImageButton) findViewById(R.id.cambioIz);
+        menu = (ImageButton) findViewById(R.id.Menu);
+        clock =(TextClock) findViewById(R.id.textClock1);
 
     }
 
@@ -153,12 +161,44 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    private void cambiarRight(){
+        //creamos un intent que hace referencia al segundo activity
+        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    private void cambiarLeft(){
+        //creamos un intent que hace referencia al segundo activity
+        Intent intent = new Intent(MainActivity.this, Main4Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+    private void cambiarMenu(){
+        //creamos un intent que hace referencia al segundo activity
+        Intent intent = new Intent(MainActivity.this, Main3Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+
+
     private void listeners(){
-        cambiarActivity.setOnClickListener(new View.OnClickListener() {
+        right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // tvScroll.setText("Temp: 20ºC   Humidity: 40%   Pressure: 100HPa   Temp: 20ºC   Humidity: 40%   Pressure: 100HPa");
-                cambiarActivity();
+                cambiarRight();
+            }
+        });
+        left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarLeft();
+            }
+        });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarMenu();
             }
         });
     }

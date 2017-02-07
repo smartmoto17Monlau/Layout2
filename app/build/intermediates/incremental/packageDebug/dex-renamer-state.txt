@@ -1,7 +1,7 @@
-#Sun Feb 05 21:04:55 CET 2017
-base.0=C\:\\Users\\USER\\Desktop\\smaRTMOTO\\Layout2\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_6a93cf31cf15da35ef97c524de6887955b5fd440
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=C\:\\Users\\USER\\Desktop\\smaRTMOTO\\Layout2\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_37af5db32606f5f643abeebd4ca3e7df152d9b9c\\classes.dex
-base.1=C\:\\Users\\USER\\Desktop\\smaRTMOTO\\Layout2\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_37af5db32606f5f643abeebd4ca3e7df152d9b9c
-file.0=C\:\\Users\\USER\\Desktop\\smaRTMOTO\\Layout2\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_6a93cf31cf15da35ef97c524de6887955b5fd440\\classes.dex
+#Tue Feb 07 09:36:59 CET 2017
+base.0=C\:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_4666b543049b6a946d6eeb0f69e55fb9ef9c0e4d
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_e7774375e5096c2d6be7aa6b2d0f6b2d38bd3d1a\\classes.dex
+base.1=C\:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_e7774375e5096c2d6be7aa6b2d0f6b2d38bd3d1a
+file.0=C\:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_4666b543049b6a946d6eeb0f69e55fb9ef9c0e4d\\classes.dex
