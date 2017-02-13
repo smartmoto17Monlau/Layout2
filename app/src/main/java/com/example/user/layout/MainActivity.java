@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Typeface type;
     ImageButton menu, right, left;
     TextClock clock;
-    OnMapReadyCallback callback;
 
     //variables globales
     private double latitud = 0, longitud = 0;
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -154,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Set the value
         gauge.setHighValue(75);
+
+        velocidad();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -246,8 +247,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(intent);
     }
 
-
-
     private void listeners(){
         right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,6 +264,66 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 cambiarMenu();
+            }
+        });
+    }
+
+
+
+
+    private void velocidad(){
+        // Find the components
+        final ScLinearGauge gauge2 = (ScLinearGauge) this.findViewById(R.id.line2);
+        assert gauge2 != null;
+
+        // Create a drawable
+        final Bitmap indicator = BitmapFactory.decodeResource(this.getResources(), R.drawable.indicator);
+
+        // Set the values.
+        gauge2.setHighValue(75);
+        gauge2.setPathTouchThreshold(100);
+
+
+        // Event
+        gauge2.setOnDrawListener(new ScGauge.OnDrawListener() {
+            @Override
+            public void onBeforeDrawCopy(ScCopier.CopyInfo info) {
+                // NOP
+            }
+
+            @Override
+            public void onBeforeDrawNotch(ScNotches.NotchInfo info) {
+                // Calculate the length
+                float min = 50.0f;
+                float max = 60.0f;
+                float current = min + (max - min) * (info.index / (float) gauge2.getNotches());
+
+                // Apply
+                info.length = gauge2.dipToPixel(current);
+            }
+
+            @Override
+            public void onBeforeDrawPointer(ScPointer.PointerInfo info) {
+                // Check if the pointer if the high pointer
+                if (info.source.getTag() == ScGauge.HIGH_POINTER_IDENTIFIER) {
+                    // Adjust the offset
+                    info.offset.x = -indicator.getWidth() / 2;
+                    info.offset.y = -indicator.getHeight() / 2 - gauge2.getStrokeSize();
+                    // Assign the bitmap to the pointer info structure
+                    info.bitmap = indicator;
+                }
+            }
+
+            @Override
+            public void onBeforeDrawToken(ScWriter.TokenInfo info) {
+                // Set angle and text
+                info.angle = 0.0f;
+                info.text = Math.round(gauge2.getHighValue()) + "%";
+
+                // Set the position
+                float distance = info.source.getDistance(gauge2.getHighValue());
+                info.offset.x = 3;
+                info.offset.y = -500;
             }
         });
     }

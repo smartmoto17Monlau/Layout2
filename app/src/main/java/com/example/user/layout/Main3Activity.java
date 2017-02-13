@@ -24,7 +24,7 @@ public class Main3Activity extends AppCompatActivity {
         referencias();
         listeners();
 
-          type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
+        type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
     }
 

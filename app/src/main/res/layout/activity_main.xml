@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_marginLeft="285dp"
-            android:textColor="#c2c2c2"
+            android:textColor="#6dbf6b"
             android:textSize="40dp"
             android:textStyle="bold"
             android:textColorHighlight="@color/yelow"/>
@@ -83,19 +83,19 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="50"
-                android:background="@color/backgroundGrey">
+                android:background="#292929">
 
                 <com.sccomponents.widgets.ScLinearGauge xmlns:sc="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/line2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:paddingBottom="20dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="50dp"
                     android:paddingTop="20dp"
-                    sc:scc_notches="300"
-                    sc:scc_notches_colors="#67ce5c|#f2f200|#e23d3d"
-                    sc:scc_notches_length="10dp"
+                    sc:scc_notches="30"
+                    sc:scc_notches_colors="#FF91B15F|#FFD1CB4F|#FFD1514F"
+                    sc:scc_notches_length="30dp"
                     sc:scc_notches_position="inside"
                     sc:scc_notches_size="2dp"
                     sc:scc_orientation="vertical"
@@ -150,7 +150,7 @@
                     sc:scc_stroke_size="10dp"
                     sc:scc_stroke_color="#dcdcdc"
                     sc:scc_progress_size="10dp"
-                    sc:scc_progress_colors="#67ce5c|#E23D3D" />
+                    sc:scc_progress_colors="#E23D3D|#FFD1CB4F|#67ce5c" />
 
             </LinearLayout>
 
