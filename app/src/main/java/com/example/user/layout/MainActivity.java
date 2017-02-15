@@ -51,12 +51,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double latitud = 0, longitud = 0;
     private boolean firstTime = true;
 
+    // String for MAC address
+    private static String address;
+
 
     @Override
     protected void onResume() {
         super.onResume();
         mapView.onResume();
 
+        //Get MAC address from DeviceListActivity via intent
+        Intent intent = getIntent();
+
+        //Get the MAC address from the DeviceListActivty via EXTRA
+        Bundle bundle = getIntent().getExtras();
+        address = bundle.getString("add");
     }
 
     @Override
@@ -231,18 +240,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void cambiarRight(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+        intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     private void cambiarLeft(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main4Activity.class);
+        intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     private void cambiarMenu(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main3Activity.class);
+        intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\layout\\device_name.xml",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\src\\main\\res\\layout\\device_name.xml"
+    },
+    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_help_text.xml",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\layout\\cast_help_text.xml"
     },
@@ -10,6 +14,10 @@
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_mini_controller.xml",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\layout\\cast_mini_controller.xml"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_device_list.xml",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\src\\main\\res\\layout\\activity_device_list.xml"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",

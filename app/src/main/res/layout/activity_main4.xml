@@ -53,16 +53,15 @@
 
 
     </LinearLayout>
-    <ImageButton
-        android:id="@+id/mainButton"
-        android:layout_width="280dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginLeft="20dp"
-        android:background="#00fff98d"
-        android:src="@drawable/mainbutton"
-        android:scaleType="fitXY"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:weightSum="20">
 
-        />
 
+
+    </LinearLayout>
 </RelativeLayout>
