@@ -45,13 +45,14 @@ public class Main3Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        /*
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
 
         //Get the MAC address from the DeviceListActivty via EXTRA
         Bundle bundle = getIntent().getExtras();
         address = bundle.getString("add");
+        */
     }
 
     private void cambiarMain(){

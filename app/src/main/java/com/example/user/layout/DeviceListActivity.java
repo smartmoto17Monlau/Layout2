@@ -87,8 +87,12 @@ public class DeviceListActivity extends AppCompatActivity {
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity while taking an extra which is the MAC address.
-            Intent i = new Intent(DeviceListActivity.this, Main3Activity.class);
+            /*Intent i = new Intent(DeviceListActivity.this, Main3Activity.class);
             i.putExtra("add", address);
+            startActivity(i);*/
+            Bluetooth btThread = new Bluetooth(address);
+            btThread.start();
+            Intent i = new Intent(DeviceListActivity.this, Main3Activity.class);
             startActivity(i);
         }
     };

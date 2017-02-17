@@ -5,33 +5,40 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="262875983279138"
+    timestamp="273831517468187"
     token="2962817122979695167"
-    verifier="FULL_BUILD_REQUESTED" >
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="1053" />
+        duration="265" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="73" />
+        duration="16" />
     <task
         name="verifier"
-        duration="2" />
+        duration="1" />
 
     <artifact
-        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
-        type="MAIN" />
+        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+        type="DEX" />
 
     <build
-        timestamp="262875983279138"
+        timestamp="271462844650459"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
+    </build>
+    <build
+        timestamp="273831517468187"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

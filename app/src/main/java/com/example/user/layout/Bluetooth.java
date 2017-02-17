@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class Bluetooth extends Thread {
     private static String address;
 
     //variables globales de sensores
-    String s0, s1, s2, s3, s4, s5, s6, s7;
+    public  static String s0, s1, s2, s3, s4, s5, s6, s7;
 
     public Bluetooth(String address){
         this.address = address;
@@ -61,9 +62,7 @@ public class Bluetooth extends Thread {
                     int endOfLineIndex = recDataString.indexOf("~");                    // determine the end-of-line
                     if (endOfLineIndex > 0) {                                           // make sure there data before ~
                         String dataInPrint = recDataString.substring(0, endOfLineIndex);    // extract string
-                        //txtString.setText("Data Received = " + dataInPrint);
                         int dataLength = dataInPrint.length();                          //get length of data received
-                        //txtStringLength.setText("String Length = " + String.valueOf(dataLength));
 
                         String sensor0 = "";
                         String sensor1 = "";
@@ -118,7 +117,6 @@ public class Bluetooth extends Thread {
                                     }
                                 }else if(arrayLetras[i] == '~'){
                                     currentSensor = 0;
-                                    //txtString.setText("~");
                                     break;
                                 }else{
                                     currentSensorValue.add(String.valueOf(arrayLetras[i]));
@@ -132,6 +130,7 @@ public class Bluetooth extends Thread {
                             s5 = sensor5;
                             s6 = sensor6;
                             s7 = sensor7;
+                            //Log.d("MyApp","aaa");
                             //s1.setText(" Sensor 1 = " + sensor1);
                             //s2.setText(" Sensor 2 = " + sensor2);
                             //s3.setText(" Sensor 3 = " + sensor3);
@@ -198,6 +197,7 @@ public class Bluetooth extends Thread {
                 String readMessage = new String(buffer, 0, bytes);
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
+                Log.d("MyApp","kkk "+s3);
             } catch (IOException e) {
                 break;
             }
