@@ -29,6 +29,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView title, title2, s0, s1, s2, s3, s4, s5, s6, s7, s8, sb0, sb1, sb2, sb3, sb4, sb5, sb6, sb7, sb8;
     Typeface type, fuente;
     Handler bluetoothIn;
+    BluetoothDevice device;
 
     ArrayList<String> currentSensorValue;
     char[] arrayLetras;
@@ -155,14 +156,14 @@ public class Main2Activity extends AppCompatActivity {
         super.onResume();
 
         //Get MAC address from DeviceListActivity via intent
-        Intent intent = getIntent();
+        //Intent intent = getIntent();
 
         //Get the MAC address from the DeviceListActivty via EXTRA
         Bundle bundle = getIntent().getExtras();
         address = bundle.getString("add");
 
         //create device and set the MAC address
-        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+        device = btAdapter.getRemoteDevice(address);
 
         try {
             btSocket = createBluetoothSocket(device);
@@ -186,8 +187,7 @@ public class Main2Activity extends AppCompatActivity {
         mConnectedThread.start();
 
         //I send a character when resuming.beginning transmission to check device is connected
-        //If it is not an exception will be thrown in the write method and finish() will be called
-        mConnectedThread.write("x");
+
     }
 
     @Override
@@ -234,6 +234,8 @@ public class Main2Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, Main4Activity.class);
         intent.putExtra("add", address);
+        //device = null;
+        //btSocket = null;
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
@@ -241,6 +243,8 @@ public class Main2Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, MainActivity.class);
         intent.putExtra("add", address);
+        //device = null;
+        //btSocket = null;
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
@@ -359,17 +363,6 @@ public class Main2Activity extends AppCompatActivity {
                 } catch (IOException e) {
                     break;
                 }
-            }
-        }
-        //write method
-        public void write(String input) {
-            byte[] msgBuffer = input.getBytes();           //converts entered String into bytes
-            try {
-                mmOutStream.write(msgBuffer);                //write bytes over BT connection via outstream
-            } catch (IOException e) {
-                //if you cannot write, close the application
-                Toast.makeText(getBaseContext(), "Connection Failure", Toast.LENGTH_LONG).show();
-                finish();
             }
         }
     }

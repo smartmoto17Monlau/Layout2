@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:sc="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main4"
+    android:id="@+id/LinearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.user.layout.Main4Activity"
-    android:background="@color/darkGrey">
+    android:orientation="vertical"
+    android:background="@color/darkGrey"
+    android:weightSum="100">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,11 +61,19 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:weightSum="20">
 
-
+        <com.example.user.layout.Speedometer
+            android:id="@+id/Speedometer"
+            android:layout_width="match_parent"
+            android:layout_height="910dp"
+            android:background="@color/darkGrey"
+            custom:currentSpeed="100"
+            custom:maxSpeed="300"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="0dp"/>
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
