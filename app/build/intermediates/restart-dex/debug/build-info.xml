@@ -5,40 +5,75 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="273831517468187"
+    timestamp="533188801582342"
     token="2962817122979695167"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="265" />
+        duration="547" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="20" />
     <task
         name="instant-run-transform"
-        duration="16" />
+        duration="24" />
     <task
         name="verifier"
-        duration="1" />
+        duration="2" />
 
     <artifact
-        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-        type="DEX" />
+        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
-        timestamp="271462844650459"
+        timestamp="530812023180581"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="273831517468187"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="532467462717726"
+        verifier="FIELD_TYPE_CHANGE" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+            type="RESOURCES" />
+    </build>
+    <build
+        timestamp="533081680377909"
+        verifier="FIELD_ADDED" >
         <artifact
             location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
             type="DEX" />
+    </build>
+    <build
+        timestamp="533121167482845"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\builds\debug\533121167482845\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="533139658674981"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\builds\debug\533139658674981\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="533161182252960"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\builds\debug\533161182252960\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="533188801582342"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>

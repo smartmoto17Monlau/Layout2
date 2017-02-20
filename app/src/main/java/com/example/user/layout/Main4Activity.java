@@ -29,16 +29,6 @@ public class Main4Activity extends AppCompatActivity {
     Typeface type;
     Boolean uiOn = true;
 
-
-
-    Handler bluetoothIn;
-    BluetoothDevice device;
-
-    ArrayList<String> currentSensorValue;
-    char[] arrayLetras;
-
-    final int handlerState = 0;
-
     private Main4Activity.refreshUI refresh;
 
     @Override
@@ -64,7 +54,6 @@ public class Main4Activity extends AppCompatActivity {
         uiOn = true;
         //mConnectedThread = new Main4Activity.ConnectedThread(btSocket);
         //mConnectedThread.start();
-
     }
     @Override
     public void onPause()
@@ -76,22 +65,18 @@ public class Main4Activity extends AppCompatActivity {
     private void cambiarRight(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, MainActivity.class);
-        //intent.putExtra("add", address);
-
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     private void cambiarLeft(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, Main2Activity.class);
-        //intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     private void cambiarMenu(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, Main3Activity.class);
-        //intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
@@ -140,16 +125,16 @@ public class Main4Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable(){
                     public void run() {
                         speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s3));
+                        //speedometer.onSpeedChanged(90);
+                        speedometer.onBatteryChanged(100);
                     }
                 });
             }
         };
 
         public void run() {
-            //while (uiOn) {
             timer = new Timer("MyTimer");//create a new timer
             timer.scheduleAtFixedRate(timerTask, 0, 50);
-            //}
         }
     }
 }

@@ -13,22 +13,25 @@ import android.view.View;
 
 public class Speedometer extends View implements SpeedChangeListener {
 	private static final String TAG = Speedometer.class.getSimpleName();
-	public static final float DEFAULT_MAX_SPEED = 300; // Assuming this is km/h and you drive a super-car
+	public static final float DEFAULT_MAX_SPEED = 200; // Assuming this is km/h and you drive a super-car
 	Typeface type;
 
 
 	// Speedometer internal state
 	private float mMaxSpeed;
 	private float mCurrentSpeed;
+	private float currentBattery;
 	
 	// Scale drawing tools
 	private Paint onMarkPaint;
 	private Paint offMarkPaint;
 	private Paint scalePaint;
+	private Paint batPaint;
 	private Paint readingPaint;
 	private Path onPath;
 	private Path offPath;
 	final RectF oval = new RectF();
+	final RectF oval2 = new RectF();
 
 	
 	// Drawing colors
@@ -37,8 +40,9 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private int ON_COLOR = Color.argb(255, 191, 187, 107);
 	private int OFF_COLOR = Color.argb(255,0x3e,0x3e,0x3e);
 	private int SCALE_COLOR = Color.argb(255, 255, 255, 255);
+	private int BATTERY_COLOR = Color.argb(255, 160, 255, 158);
 	private int VALUE_COLOR = Color.argb(255, 191, 187, 107);
-	private float SCALE_SIZE = 50f;
+	private float SCALE_SIZE = 60f;
 	private float READING_SIZE = 60f;
 	
 	// Scale configuration
@@ -58,6 +62,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		try{
 			mMaxSpeed = a.getFloat(R.styleable.Speedometer_maxSpeed, DEFAULT_MAX_SPEED);
 			mCurrentSpeed = a.getFloat(R.styleable.Speedometer_currentSpeed, 0);
+			currentBattery = a.getFloat(R.styleable.Speedometer_currentSpeed, 0);
 			ON_COLOR = a.getColor(R.styleable.Speedometer_onColor, ON_COLOR);
 			OFF_COLOR = a.getColor(R.styleable.Speedometer_offColor, OFF_COLOR);
 			SCALE_COLOR = a.getColor(R.styleable.Speedometer_scaleColor, SCALE_COLOR);
@@ -82,6 +87,11 @@ public class Speedometer extends View implements SpeedChangeListener {
 		offMarkPaint.setColor(OFF_COLOR);
 		offMarkPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		offMarkPaint.setShadowLayer(0f, 0f, 0f, OFF_COLOR);
+
+		batPaint = new Paint(onMarkPaint);
+		batPaint.setColor(BATTERY_COLOR);
+		batPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+		batPaint.setShadowLayer(0f, 0f, 0f, OFF_COLOR);
 		
 		scalePaint = new Paint(offMarkPaint);
 		scalePaint.setStrokeWidth(2f);
@@ -112,6 +122,15 @@ public class Speedometer extends View implements SpeedChangeListener {
 		else
 			this.mCurrentSpeed = mCurrentSpeed;
 	}
+
+	public void setCurrentBattery(float mCurrentBattery) {
+		if(mCurrentBattery > this.mMaxSpeed)
+			this.currentBattery = mMaxSpeed;
+		else if(mCurrentBattery < 0)
+			this.currentBattery = 0;
+		else
+			this.currentBattery = mCurrentBattery;
+	}
 	
 	@Override
 	protected void onSizeChanged(int width, int height, int oldw, int oldh) {
@@ -122,10 +141,11 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}else{
 			radius = width/3;
 		}
-		oval.set(centerX - radius, 
+		oval.set(centerX - radius,
 				centerY - radius, 
 				centerX + radius, 
 				centerY + radius);
+		oval2.set(100, 100, 400, 400);
 	}
 	
 	@Override
@@ -167,8 +187,12 @@ public class Speedometer extends View implements SpeedChangeListener {
 		drawScale(canvas);
 		drawLegend(canvas);
 		drawReading(canvas);
+
+		drawScaleBackground2(canvas);
+		drawScale2(canvas);
+		drawReading2(canvas);
 	}
-	
+
 	/**
 	 * Draws the segments in their OFF state
 	 * @param canvas
@@ -195,15 +219,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 		Path circle = new Path();
 		double halfCircumference = radius * Math.PI;
 		double increments = 20;
+		scalePaint.setTypeface(type);
 		for(int i = 0; i < this.mMaxSpeed; i += increments){
 			circle.addCircle(centerX, centerY, radius, Path.Direction.CW);
 			canvas.drawTextOnPath(String.format("%d", i), 
 								circle, 
 								(float) (i*halfCircumference/this.mMaxSpeed), 
 								-30f,
-								scalePaint);			
-		}
-		
+								scalePaint);}
 		canvas.restore();
 	}
 	
@@ -219,5 +242,37 @@ public class Speedometer extends View implements SpeedChangeListener {
 	public void onSpeedChanged(float newSpeedValue) {
 		this.setCurrentSpeed(newSpeedValue);
 		this.invalidate();
+	}
+	@Override
+	public void onBatteryChanged(float newBatValue) {
+		this.setCurrentBattery(newBatValue);
+		this.invalidate();
+	}
+
+
+
+	private void drawScaleBackground2(Canvas canvas){
+		offPath.reset();
+		for(int i = -360; i < 0; i+=4){
+			offPath.addArc(oval2, i, 2f);
+		}
+		canvas.drawPath(offPath, offMarkPaint);
+	}
+
+	private void drawScale2(Canvas canvas){
+		onPath.reset();
+		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+			onPath.addArc(oval2, i, 2f);
+		}
+		canvas.drawPath(onPath, batPaint);
+	}
+	private void drawReading2(Canvas canvas){
+
+
+		String message = String.format("%d", (int)this.currentBattery / 2);
+		readingPaint.setTextSize(100);
+		readingPaint.setTypeface(type);
+		readingPaint.setColor(BATTERY_COLOR);
+		canvas.drawText(message, 200, 285, readingPaint);
 	}
 }

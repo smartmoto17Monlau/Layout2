@@ -68,12 +68,12 @@
         <com.example.user.layout.Speedometer
             android:id="@+id/Speedometer"
             android:layout_width="match_parent"
-            android:layout_height="910dp"
+            android:layout_height="930dp"
             android:background="@color/darkGrey"
             custom:currentSpeed="100"
-            custom:maxSpeed="300"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="0dp"/>
+            custom:maxSpeed="200"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp" />
 
     </LinearLayout>
 </LinearLayout>
