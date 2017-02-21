@@ -32,6 +32,8 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private Path offPath;
 	final RectF oval = new RectF();
 	final RectF oval2 = new RectF();
+	final RectF oval3 = new RectF();
+	final RectF oval4 = new RectF();
 
 	
 	// Drawing colors
@@ -42,6 +44,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private int SCALE_COLOR = Color.argb(255, 255, 255, 255);
 	private int BATTERY_COLOR = Color.argb(255, 160, 255, 158);
 	private int VALUE_COLOR = Color.argb(255, 191, 187, 107);
+	private int RED_COLOR = Color.argb(255, 166, 0, 0);
 	private float SCALE_SIZE = 60f;
 	private float READING_SIZE = 60f;
 	
@@ -123,6 +126,10 @@ public class Speedometer extends View implements SpeedChangeListener {
 			this.mCurrentSpeed = mCurrentSpeed;
 	}
 
+	public float getCurrentBattery() {
+		return currentBattery;
+	}
+
 	public void setCurrentBattery(float mCurrentBattery) {
 		if(mCurrentBattery > this.mMaxSpeed)
 			this.currentBattery = mMaxSpeed;
@@ -141,11 +148,10 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}else{
 			radius = width/3;
 		}
-		oval.set(centerX - radius,
-				centerY - radius, 
-				centerX + radius, 
-				centerY + radius);
-		oval2.set(100, 100, 400, 400);
+		oval.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
+		oval2.set(30, 30, 460, 460);
+		oval3.set(1220, 20, 1520, 320);
+		oval4.set(1530, 300, 1830, 600);
 	}
 	
 	@Override
@@ -183,14 +189,24 @@ public class Speedometer extends View implements SpeedChangeListener {
 	
 	@Override
 	public void onDraw(Canvas canvas){
+		//canvas.drawColor(Color.BLUE);
+		//velocity
 		drawScaleBackground(canvas);
 		drawScale(canvas);
 		drawLegend(canvas);
 		drawReading(canvas);
-
+		//battery
 		drawScaleBackground2(canvas);
 		drawScale2(canvas);
 		drawReading2(canvas);
+		//motor temp
+		drawScaleBackground3(canvas);
+		drawScale3(canvas);
+		//drawReading2(canvas);
+		//battery temp
+		drawScaleBackground4(canvas);
+		drawScale4(canvas);
+		//drawReading2(canvas);
 	}
 
 	/**
@@ -202,7 +218,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 		for(int i = -180; i < 0; i+=4){
 			offPath.addArc(oval, i, 2f);
 		}
-		canvas.drawPath(offPath, offMarkPaint);
+		if(getCurrentSpeed() >= 140){
+			offMarkPaint.setColor(RED_COLOR);
+			canvas.drawPath(offPath, offMarkPaint);
+		}else{
+			offMarkPaint.setColor(OFF_COLOR);
+			canvas.drawPath(offPath, offMarkPaint);
+		}
+
 	}
 	
 	private void drawScale(Canvas canvas){
@@ -235,7 +258,9 @@ public class Speedometer extends View implements SpeedChangeListener {
 		readingPaint.setTextSize(300);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);
-		canvas.drawText(message, 710, 800, readingPaint);
+		canvas.drawText(message, 610, 920, readingPaint);
+		readingPaint.setTextSize(150);
+		canvas.drawText("km/h", 1000, 920, readingPaint);
 	}
 
 	@Override
@@ -256,6 +281,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		for(int i = -360; i < 0; i+=4){
 			offPath.addArc(oval2, i, 2f);
 		}
+		offMarkPaint.setColor(OFF_COLOR);
 		canvas.drawPath(offPath, offMarkPaint);
 	}
 
@@ -264,15 +290,97 @@ public class Speedometer extends View implements SpeedChangeListener {
 		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
 			onPath.addArc(oval2, i, 2f);
 		}
-		canvas.drawPath(onPath, batPaint);
+
+		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+			offMarkPaint.setColor(Color.YELLOW);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else if(getCurrentBattery() <= 35){
+			offMarkPaint.setColor(Color.RED);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else{
+			offMarkPaint.setColor(OFF_COLOR);
+			canvas.drawPath(onPath, batPaint);
+		}
 	}
 	private void drawReading2(Canvas canvas){
 
 
 		String message = String.format("%d", (int)this.currentBattery / 2);
-		readingPaint.setTextSize(100);
+		readingPaint.setTextSize(150);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(BATTERY_COLOR);
-		canvas.drawText(message, 200, 285, readingPaint);
+		canvas.drawText(message+"%", 140, 295, readingPaint);
+	}
+
+	private void drawScaleBackground3(Canvas canvas){
+		offPath.reset();
+		for(int i = -360; i < 0; i+=4){
+			offPath.addArc(oval3, i, 2f);
+		}
+		offMarkPaint.setColor(OFF_COLOR);
+		canvas.drawPath(offPath, offMarkPaint);
+	}
+
+	private void drawScale3(Canvas canvas){
+		onPath.reset();
+		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+			onPath.addArc(oval3, i, 2f);
+		}
+
+		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+			offMarkPaint.setColor(Color.YELLOW);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else if(getCurrentBattery() <= 35){
+			offMarkPaint.setColor(Color.RED);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else{
+			offMarkPaint.setColor(OFF_COLOR);
+			canvas.drawPath(onPath, batPaint);
+		}
+	}
+	private void drawReading3(Canvas canvas){
+
+
+		String message = String.format("%d", (int)this.currentBattery / 2);
+		readingPaint.setTextSize(150);
+		readingPaint.setTypeface(type);
+		readingPaint.setColor(BATTERY_COLOR);
+		canvas.drawText(message+"%", 140, 295, readingPaint);
+	}
+
+	private void drawScaleBackground4(Canvas canvas){
+		offPath.reset();
+		for(int i = -360; i < 0; i+=4){
+			offPath.addArc(oval4, i, 2f);
+		}
+		offMarkPaint.setColor(OFF_COLOR);
+		canvas.drawPath(offPath, offMarkPaint);
+	}
+
+	private void drawScale4(Canvas canvas){
+		onPath.reset();
+		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+			onPath.addArc(oval4, i, 2f);
+		}
+
+		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+			offMarkPaint.setColor(Color.YELLOW);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else if(getCurrentBattery() <= 35){
+			offMarkPaint.setColor(Color.RED);
+			canvas.drawPath(onPath, offMarkPaint);
+		}else{
+			offMarkPaint.setColor(OFF_COLOR);
+			canvas.drawPath(onPath, batPaint);
+		}
+	}
+	private void drawReading4(Canvas canvas){
+
+
+		String message = String.format("%d", (int)this.currentBattery / 2);
+		readingPaint.setTextSize(150);
+		readingPaint.setTypeface(type);
+		readingPaint.setColor(BATTERY_COLOR);
+		canvas.drawText(message+"%", 140, 295, readingPaint);
 	}
 }
