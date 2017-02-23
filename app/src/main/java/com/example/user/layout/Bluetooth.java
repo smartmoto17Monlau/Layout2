@@ -197,7 +197,7 @@ public class Bluetooth extends Thread {
                 String readMessage = new String(buffer, 0, bytes);
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
-                Log.d("Datos Arduino","kkk "+s3+ " "+s0+" "+s1+" "+s2+" "+s4+ " "+ s5+" "+s6+ " "+ s7 );
+                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7 );
             } catch (IOException e) {
                 break;
             }
