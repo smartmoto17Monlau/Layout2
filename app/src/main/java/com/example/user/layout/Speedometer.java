@@ -2,8 +2,11 @@ package com.example.user.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
@@ -11,10 +14,11 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class Speedometer extends View implements SpeedChangeListener {
+public class     Speedometer extends View implements SpeedChangeListener {
 	private static final String TAG = Speedometer.class.getSimpleName();
 	public static final float DEFAULT_MAX_SPEED = 200; // Assuming this is km/h and you drive a super-car
 	Typeface type, type2;
+	float maxSpeed = 0, avgSpeed = 60;
 
 
 	// Speedometer internal state
@@ -56,6 +60,11 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private float centerX;
 	private float centerY;
 	private float radius;
+	Matrix  mMatrix = new Matrix();
+	Matrix  mMatrix2 = new Matrix();
+
+	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bikepos);
+	Bitmap mBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.bikeposf);
 
 	public Speedometer(Context context){
 		super(context);
@@ -114,10 +123,12 @@ public class Speedometer extends View implements SpeedChangeListener {
 		readingPaint.setTypeface(Typeface.SANS_SERIF);
 		readingPaint.setColor(Color.WHITE);
 
-		smallScale = new Paint();
-		readingPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        readingPaint.setTypeface(type2);
-        readingPaint.setColor(Color.WHITE);
+		smallScale = new Paint(scalePaint);
+		smallScale.setStyle(Paint.Style.FILL_AND_STROKE);
+		smallScale.setShadowLayer(0f, 0f, 0f, Color.YELLOW);
+		smallScale.setTextSize(40);
+		smallScale.setTypeface(type2);
+		smallScale.setColor(Color.parseColor("#FF979797"));
 
 		onPath = new Path();
 		offPath = new Path();
@@ -167,14 +178,11 @@ public class Speedometer extends View implements SpeedChangeListener {
 		oval.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
 		oval2.set(30, 30, 460, 460);
 		oval3.set(1220, 20, 1520, 320);
-		oval4.set(1530, 300, 1830, 600);
+		oval4.set(1530, 240, 1830, 540);
 	}
 	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//		Log.d(TAG, "Width spec: " + MeasureSpec.toString(widthMeasureSpec));
-//		Log.d(TAG, "Height spec: " + MeasureSpec.toString(heightMeasureSpec));
-		
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		
@@ -197,7 +205,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 			return getPreferredSize();
 		} 
 	}
-	
 	// in case there is no size specified
 	private int getPreferredSize() {
 		return 300;
@@ -206,6 +213,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	@Override
 	public void onDraw(Canvas canvas){
 		//canvas.drawColor(Color.BLUE);
+		MeasureVel();
 		//velocity
 		drawScaleBackground(canvas);
 		drawScale(canvas);
@@ -223,6 +231,18 @@ public class Speedometer extends View implements SpeedChangeListener {
 		drawScaleBackground4(canvas);
 		drawScale4(canvas);
 		drawReading4(canvas);
+		//info
+		drawInfo(canvas);
+
+		mMatrix.setRotate (motionsensors.pitch+37, mBitmap.getWidth()/2, mBitmap.getHeight()/2);
+		mMatrix.postTranslate(1650, 760);
+		canvas.drawBitmap(mBitmap, mMatrix, null);
+
+		mMatrix2.setRotate ((motionsensors.azimuth-88)*-1, mBitmap2.getWidth()/2, mBitmap2.getHeight()/2);
+		mMatrix2.postTranslate(1650, 595);
+		canvas.drawBitmap(mBitmap2, mMatrix2, null);
+
+
 	}
 
 	/**
@@ -241,7 +261,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 			offMarkPaint.setColor(OFF_COLOR);
 			canvas.drawPath(offPath, offMarkPaint);
 		}
-
 	}
 	
 	private void drawScale(Canvas canvas){
@@ -274,9 +293,13 @@ public class Speedometer extends View implements SpeedChangeListener {
 		readingPaint.setTextSize(300);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);
-		canvas.drawText(message, 610, 920, readingPaint);
+		canvas.drawText(message, 770, 920, readingPaint);
 		readingPaint.setTextSize(150);
-		canvas.drawText("km/h", 1000, 920, readingPaint);
+		canvas.drawText("km/h", 1170, 920, readingPaint);
+		//maxSpeed
+		readingPaint.setTextSize(100);
+		canvas.drawText("Max: "+Math.round(maxSpeed), 420, 920, readingPaint);
+		canvas.drawText("AVG: "+Math.round(avgSpeed), 420, 820, readingPaint);
 	}
 
 	@Override
@@ -299,8 +322,6 @@ public class Speedometer extends View implements SpeedChangeListener {
 		this.setCurrentBatteryTemp(newBatteryTempValue);
 		this.invalidate();
 	}
-
-
 
 	private void drawScaleBackground2(Canvas canvas){
 		offPath.reset();
@@ -328,24 +349,26 @@ public class Speedometer extends View implements SpeedChangeListener {
 			canvas.drawPath(onPath, batPaint);
 		}
 	}
-	private void drawReading2(Canvas canvas){
 
-
-		String message = String.format("%d", (int)this.currentBattery / 2);
+	private void drawReading2(Canvas canvas) {
+		String message = String.format("%d", (int) this.currentBattery / 2);
 		readingPaint.setTextSize(150);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(BATTERY_COLOR);
-		canvas.drawText(message+"%", 140, 310, readingPaint);
+		canvas.drawText(message + "%", 140, 310, readingPaint);
 		readingPaint.setTextSize(50);
 		readingPaint.setColor(VALUE_COLOR);
 		canvas.drawText("Bike Battery", 110, 180, readingPaint);
-		readingPaint.setTextSize(40);
-		readingPaint.setTypeface(type2);
-		canvas.drawText("TEMP: "+Bluetooth.s4+"ºC", 5, 750, readingPaint);
-		canvas.drawText("HUM: "+Bluetooth.s5+"%", 5, 800, readingPaint);
-		canvas.drawText("HGT: "+Bluetooth.s5+"m", 5, 850, readingPaint);
-		canvas.drawText("PA: "+Bluetooth.s5+"Hpa", 5, 900, readingPaint);
 
+	}
+
+	private void drawInfo(Canvas canvas){
+		smallScale.setTextSize(40);
+		smallScale.setTypeface(type2);
+		canvas.drawText("TEMP: "+Bluetooth.s4+"ºC", 0, 750, smallScale);
+		canvas.drawText("HUM: "+Bluetooth.s5+"%", 0, 800, smallScale);
+		canvas.drawText("HGT: "+Bluetooth.s7+"m", 0, 850, smallScale);
+		canvas.drawText("PA: "+Bluetooth.s6+"Hpa", 0, 900, smallScale);
 	}
 
 	private void drawScaleBackground3(Canvas canvas){
@@ -375,15 +398,13 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}
 	}
 	private void drawReading3(Canvas canvas){
-
-
 		String message = String.format("%d", (int)this.mCurrentMotorTemp / 2);
 		readingPaint.setTextSize(100);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);
-		canvas.drawText(message+"ºC", 1600, 500, readingPaint);
+		canvas.drawText(message+"ºC", 1600, 450, readingPaint);
 		readingPaint.setTextSize(30);
-		canvas.drawText("Motor Temp", 1610, 390, readingPaint);
+		canvas.drawText("Motor Temp", 1610, 340, readingPaint);
 	}
 
 	private void drawScaleBackground4(Canvas canvas){
@@ -413,14 +434,18 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}
 	}
 	private void drawReading4(Canvas canvas){
-
-
 		String message = String.format("%d", (int)this.mCurrentBatteryTemp / 2);
 		readingPaint.setTextSize(100);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);
-		canvas.drawText(message+"ºC", 1280, 220, readingPaint);
+		canvas.drawText(message+"ºC", 1290, 220, readingPaint);
 		readingPaint.setTextSize(30);
 		canvas.drawText("Battery temp", 1290, 120, readingPaint);
+	}
+
+	private void MeasureVel(){
+		if(maxSpeed < mCurrentSpeed){
+			maxSpeed = mCurrentSpeed;
+		}
 	}
 }

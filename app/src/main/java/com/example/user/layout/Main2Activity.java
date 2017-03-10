@@ -130,7 +130,6 @@ public class Main2Activity extends AppCompatActivity {
         sb8 = (TextView) findViewById(R.id.bs8);
     }
 
-
     private void listeners(){
         right.setOnClickListener(new View.OnClickListener() {
             @Override

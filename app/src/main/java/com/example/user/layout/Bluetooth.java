@@ -41,7 +41,7 @@ public class Bluetooth extends Thread {
     private static String address;
 
     //variables globales de sensores
-    public  static String s0, s1, s2, s3, s4, s5, s6, s7;
+    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
 
     public Bluetooth(String address){
         this.address = address;
@@ -50,7 +50,6 @@ public class Bluetooth extends Thread {
     }
     public Bluetooth(){
     }
-
 
     private void init(){
         bluetoothIn = new Handler() {
@@ -72,6 +71,11 @@ public class Bluetooth extends Thread {
                         String sensor5 = "";
                         String sensor6 = "";
                         String sensor7 = "";
+                        String sensor8 = "";
+                        String sensor9 = "";
+                        String sensor10 = "";
+                        String sensor11 = "";
+                        String sensor12 = "";
 
                         if (recDataString.charAt(0) == '#')       //if it starts with # we know it is what we are looking for
                         {
@@ -113,6 +117,29 @@ public class Bluetooth extends Thread {
                                     }else if (currentSensor == 7){
                                         sensor7 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
+                                        currentSensor++;
+                                    }else if (currentSensor == 8){
+                                        sensor8 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                    }else if (currentSensor == 9){
+                                        sensor9 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                    }
+                                    else if (currentSensor == 10){
+                                        sensor10 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                    }
+                                    else if (currentSensor == 11){
+                                        sensor11 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                    }
+                                    else if (currentSensor == 12){
+                                        sensor12 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
                                         currentSensor = 0;
                                     }
                                 }else if(arrayLetras[i] == '~'){
@@ -130,15 +157,11 @@ public class Bluetooth extends Thread {
                             s5 = sensor5;
                             s6 = sensor6;
                             s7 = sensor7;
-                            //Log.d("MyApp","aaa");
-                            //s1.setText(" Sensor 1 = " + sensor1);
-                            //s2.setText(" Sensor 2 = " + sensor2);
-                            //s3.setText(" Sensor 3 = " + sensor3);
-                            //s4.setText(" Sensor 4 = " + sensor4);
-                            //s5.setText(" Sensor 5 = " + sensor5);
-                            //s6.setText(" Temp = " + sensor6 +"ºC");
-                            //s7.setText(" Humidity = " + sensor7+ "%");
-
+                            s8 = sensor8;
+                            s9 = sensor9;
+                            s10 = sensor10;
+                            s11= sensor11;
+                            s12= sensor12;
                         }
                         recDataString.delete(0, recDataString.length());   //clear all string data
                     }
@@ -197,7 +220,8 @@ public class Bluetooth extends Thread {
                 String readMessage = new String(buffer, 0, bytes);
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
-                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7 );
+
+                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11);
             } catch (IOException e) {
                 break;
             }
