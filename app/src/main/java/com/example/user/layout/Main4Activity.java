@@ -146,6 +146,7 @@ public class Main4Activity extends AppCompatActivity {
                             //speedometer.onBatteryChanged(60);
                             speedometer.onBatteryTempChanged(Float.parseFloat(Bluetooth.s3));
                             speedometer.onMotorTempChanged(Float.parseFloat(Bluetooth.s5));
+
                         }catch(Exception e){
 
                         }

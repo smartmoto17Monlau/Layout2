@@ -14,7 +14,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class     Speedometer extends View implements SpeedChangeListener {
+public class Speedometer extends View implements SpeedChangeListener {
 	private static final String TAG = Speedometer.class.getSimpleName();
 	public static final float DEFAULT_MAX_SPEED = 200; // Assuming this is km/h and you drive a super-car
 	Typeface type, type2;

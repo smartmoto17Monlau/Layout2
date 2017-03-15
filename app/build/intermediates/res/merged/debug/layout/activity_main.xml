@@ -85,6 +85,16 @@
                 android:weightSum="50"
                 android:background="@color/darkGrey">
 
+                <com.example.user.layout.Meters
+                    android:id="@+id/meter"
+                    xmlns:custom="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/darkGrey"
+                    custom:currentSpeed2="100"
+                    custom:maxSpeed2="200" />
+
+                <!--
                 <com.sccomponents.widgets.ScLinearGauge xmlns:sc="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/line2"
                     android:layout_width="70dp"
@@ -102,7 +112,7 @@
                     sc:scc_text_tokens="100%"
                     sc:scc_text_unbend="true"
                     sc:scc_text_align="left"
-                    sc:scc_path_touchable="true" />
+                    sc:scc_path_touchable="true" /> -->
 
             </LinearLayout>
         </LinearLayout>
@@ -118,7 +128,7 @@
 
             <com.google.android.gms.maps.MapView android:id="@+id/mapview"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="match_parent" />
         </LinearLayout>
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"

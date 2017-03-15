@@ -160,8 +160,8 @@ public class Bluetooth extends Thread {
                             s8 = sensor8;
                             s9 = sensor9;
                             s10 = sensor10;
-                            s11= sensor11;
-                            s12= sensor12;
+                            s11 = sensor11;
+                            s12 = sensor12;
                         }
                         recDataString.delete(0, recDataString.length());   //clear all string data
                     }

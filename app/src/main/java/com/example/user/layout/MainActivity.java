@@ -35,6 +35,8 @@ import com.sccomponents.widgets.ScPointer;
 import com.sccomponents.widgets.ScWriter;
 
 import java.text.DecimalFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -46,6 +48,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Typeface type;
     ImageButton menu, right, left;
     TextClock clock;
+
+    ScLinearGauge gauge = null;
+    ScLinearGauge gauge2 = null;
+
+    private MainActivity.refreshUI refresh;
+
+
 
     //variables globales
     private double latitud = 0, longitud = 0;
@@ -109,51 +118,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(savedInstanceState);
         tvScroll.setSelected(true);
 
-        // Find the components
-        final ScLinearGauge gauge = (ScLinearGauge) this.findViewById(R.id.line);
-        assert gauge != null;
-
-        // Remove all features
-        gauge.removeAllFeatures();
-
-        // Take in mind that when you tagged a feature after this feature inherit the principal
-        // characteristic of the identifier.
-        // For example in the case of the BASE_IDENTIFIER the feature notches (always) will be
-        // settle as the color and stroke size settle for the base (in xml or via code).
-
-        // Create the base notches.
-        ScNotches base = (ScNotches) gauge.addFeature(ScNotches.class);
-        base.setTag(ScGauge.BASE_IDENTIFIER);
-        base.setCount(20);
-        base.setLength(gauge.dipToPixel(18));
-
-        // Note that I will create two progress because to one will add the blur and to the other
-        // will be add the emboss effect.
-
-        // Create the progress notches.
-        ScNotches progressBlur = (ScNotches) gauge.addFeature(ScNotches.class);
-        progressBlur.setTag(ScGauge.PROGRESS_IDENTIFIER);
-        progressBlur.setCount(20);
-        progressBlur.setLength(gauge.dipToPixel(18));
-
-        // Create the progress notches.
-        ScNotches progressEmboss = (ScNotches) gauge.addFeature(ScNotches.class);
-        progressEmboss.setTag(ScGauge.PROGRESS_IDENTIFIER);
-        progressEmboss.setCount(20);
-        progressEmboss.setLength(gauge.dipToPixel(18));
-
-        // Blur filter
-        BlurMaskFilter blur = new BlurMaskFilter(5.0f, BlurMaskFilter.Blur.SOLID);
-        progressBlur.getPainter().setMaskFilter(blur);
-
-        // Emboss filter
-        EmbossMaskFilter emboss = new EmbossMaskFilter(new float[]{0.0f, 1.0f, 0.5f}, 0.8f, 3.0f, 0.5f);
-        progressEmboss.getPainter().setMaskFilter(emboss);
-
-        // Set the value
-        gauge.setHighValue(75);
-
-        velocidad();
+        bateria();
+        //velocidad();
+        final Meters meters = (Meters) findViewById(R.id.meter);
+        refresh = new MainActivity.refreshUI(gauge, gauge2, meters);
+        refresh.start();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -268,11 +237,55 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    private void bateria(){
+        // Find the components
+        gauge = (ScLinearGauge) this.findViewById(R.id.line);
+        assert gauge != null;
 
+        // Remove all features
+        gauge.removeAllFeatures();
 
+        // Take in mind that when you tagged a feature after this feature inherit the principal
+        // characteristic of the identifier.
+        // For example in the case of the BASE_IDENTIFIER the feature notches (always) will be
+        // settle as the color and stroke size settle for the base (in xml or via code).
+
+        // Create the base notches.
+        ScNotches base = (ScNotches) gauge.addFeature(ScNotches.class);
+        base.setTag(ScGauge.BASE_IDENTIFIER);
+        base.setCount(20);
+        base.setLength(gauge.dipToPixel(18));
+
+        // Note that I will create two progress because to one will add the blur and to the other
+        // will be add the emboss effect.
+
+        // Create the progress notches.
+        ScNotches progressBlur = (ScNotches) gauge.addFeature(ScNotches.class);
+        progressBlur.setTag(ScGauge.PROGRESS_IDENTIFIER);
+        progressBlur.setCount(20);
+        progressBlur.setLength(gauge.dipToPixel(18));
+
+        // Create the progress notches.
+        ScNotches progressEmboss = (ScNotches) gauge.addFeature(ScNotches.class);
+        progressEmboss.setTag(ScGauge.PROGRESS_IDENTIFIER);
+        progressEmboss.setCount(20);
+        progressEmboss.setLength(gauge.dipToPixel(18));
+
+        // Blur filter
+        BlurMaskFilter blur = new BlurMaskFilter(5.0f, BlurMaskFilter.Blur.SOLID);
+        progressBlur.getPainter().setMaskFilter(blur);
+
+        // Emboss filter
+        EmbossMaskFilter emboss = new EmbossMaskFilter(new float[]{0.0f, 1.0f, 0.5f}, 0.8f, 3.0f, 0.5f);
+        progressEmboss.getPainter().setMaskFilter(emboss);
+
+        // Set the value
+        gauge.setHighValue(75);
+    }
+    /*
     private void velocidad(){
         // Find the components
-        final ScLinearGauge gauge2 = (ScLinearGauge) this.findViewById(R.id.line2);
+        gauge2 = (ScLinearGauge) this.findViewById(R.id.line2);
         assert gauge2 != null;
 
         // Create a drawable
@@ -325,5 +338,38 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 info.offset.y = -500;
             }
         });
+    }*/
+
+    //create new class for connect thread
+    private class refreshUI extends Thread {
+        ScLinearGauge gauge, gauge2;
+        Meters m;
+        Timer timer;
+        public refreshUI(ScLinearGauge gauge, ScLinearGauge gauge2, Meters m) {
+            this.gauge = gauge;
+            this.gauge2 = gauge2;
+            this.m = m;
+        }
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable(){
+                    public void run() {
+                        try{
+                            gauge.setHighValue(Integer.parseInt(Bluetooth.s7));
+                            m.onSpeedChanged(Float.parseFloat(Bluetooth.s8));
+                        }catch(Exception e){
+
+                        }
+                    }
+                });
+            }
+        };
+
+        public void run() {
+            timer = new Timer("MyTimer");//create a new timer
+            timer.scheduleAtFixedRate(timerTask, 0, 50);
+        }
     }
 }
