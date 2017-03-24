@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by jordimasmer on 13/03/2017.
  */
@@ -16,12 +18,15 @@ import android.view.View;
 public class Meters extends View implements SpeedChangeListener {
 
     private float mMaxSpeed = 130;
-    private float xPointer=810;
-    private int xMax=810;
-    private float delatX = 0;
+    private float yPointer=810;
+    private float yPointerS;
+    private int yMax=810;
+    private float delatY = 0;
     private float mCurrentSpeed;
     private float currentBattery;
     private float mCurrentBatteryTemp;
+    float[] listaY = new float[10];
+    int index = 0;
 
     Paint p = new Paint();
     Typeface type;
@@ -34,10 +39,15 @@ public class Meters extends View implements SpeedChangeListener {
 
     public Meters(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Meter, 0, 0);
         type = Typeface.createFromAsset(context.getAssets(),"fonts/GeosansLight.ttf");
         p.setTypeface(type);
         p.setAntiAlias(true);
+
+        for(int i = 0; i<9; i++){
+            listaY[i] = 0;
+        }
     }
 
 
@@ -49,9 +59,11 @@ public class Meters extends View implements SpeedChangeListener {
         }else {
             this.mCurrentSpeed = mCurrentSpeed;
         }
+        //calc pointer y position
+        delatY = (mCurrentSpeed/10)*58.5714f;
+        yPointer = yMax - delatY;
 
-        delatX = (mCurrentSpeed/10)*58.5714f;
-        xPointer = xMax - delatX;
+        yPointerS = suavizarPointer(yPointer);
 
     }
 
@@ -89,7 +101,23 @@ public class Meters extends View implements SpeedChangeListener {
         }
         p.setColor(Color.RED);
         p.setStrokeWidth(3);
-        canvas.drawLine(0, xPointer, 70, xPointer, p);
+        canvas.drawLine(0, yPointerS, 70, yPointerS, p);
+    }
+    private float suavizarPointer(float yPointer){
+        float suavizado = 0;
+        if(index < 9){
+            listaY[index] = yPointer;
+            index++;
+        }else{
+            listaY[index] = yPointer;
+            index = 0;
+        }
+
+        for (int i = 0; i< listaY.length; i++){
+            suavizado += listaY[i];
+        }
+        suavizado = suavizado/listaY.length;
+        return suavizado;
     }
 
 

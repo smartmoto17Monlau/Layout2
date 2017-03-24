@@ -446,6 +446,11 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private void MeasureVel(){
 		if(maxSpeed < mCurrentSpeed){
 			maxSpeed = mCurrentSpeed;
+			if(Bluetooth.max > maxSpeed){
+				maxSpeed = Bluetooth.max;
+			}else{
+				Bluetooth.max = maxSpeed;
+			}
 		}
 	}
 }

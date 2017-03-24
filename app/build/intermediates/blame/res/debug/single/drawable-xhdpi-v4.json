@@ -32,12 +32,12 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_02_light.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\quantum_ic_clear_white_24.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\drawable-xhdpi-v4\\quantum_ic_clear_white_24.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\quantum_ic_clear_white_24.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\drawable-xhdpi-v4\\quantum_ic_clear_white_24.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_12_light.png",
@@ -60,12 +60,12 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast\\9.6.0\\res\\drawable-xhdpi-v4\\cast_ic_notification_on.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.6.0\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_13_light.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_13_light.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.6.0\\res\\drawable-xhdpi-v4\\common_google_signin_btn_text_dark_normal.9.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_03_light.png",
@@ -112,32 +112,32 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_21_dark.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_21_dark.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\quantum_ic_pause_grey600_48.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\drawable-xhdpi-v4\\quantum_ic_pause_grey600_48.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_21_dark.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_21_dark.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\quantum_ic_replay_white_24.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\drawable-xhdpi-v4\\quantum_ic_replay_white_24.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_04_light.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_04_light.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.6.0\\res\\drawable-xhdpi-v4\\common_google_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
@@ -152,12 +152,12 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_19_light.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_22_light.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_22_light.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_22_light.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_22_light.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_09_light.png",
@@ -196,12 +196,12 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_02_light.png"
     },
     {
-        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_11_dark.png",
-        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_11_dark.png"
-    },
-    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_on_11_dark.png",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_on_11_dark.png"
+    },
+    {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_media_route_connecting_11_dark.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.android.support\\mediarouter-v7\\24.0.0\\res\\drawable-xhdpi-v4\\ic_media_route_connecting_11_dark.png"
     },
     {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\places_ic_clear.png",

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     //declaracion widgets
     GoogleMap googleMap;
     MapView mapView;
-    TextView tvScroll;
+    //TextView tvScroll;
     Typeface type;
     ImageButton menu, right, left;
     TextClock clock;
@@ -112,11 +112,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         referencias();
 
         type = Typeface.createFromAsset(getAssets(), "fonts/GeosansLight.ttf");
-        tvScroll.setTypeface(type);
+        //tvScroll.setTypeface(type);
         type = Typeface.createFromAsset(getAssets(), "fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
         mapView.onCreate(savedInstanceState);
-        tvScroll.setSelected(true);
+        //tvScroll.setSelected(true);
 
         bateria();
         //velocidad();
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void referencias(){
         mapView = (MapView) findViewById(R.id.mapview);
-        tvScroll = (TextView) findViewById(R.id.textViewScroll);
+        //tvScroll = (TextView) findViewById(R.id.textViewScroll);
         clock =(TextClock) findViewById(R.id.textClock1);
         right = (ImageButton) findViewById(R.id.cambioDe);
         left = (ImageButton) findViewById(R.id.cambioIz);
@@ -236,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-
     private void bateria(){
         // Find the components
         gauge = (ScLinearGauge) this.findViewById(R.id.line);
@@ -282,63 +281,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Set the value
         gauge.setHighValue(75);
     }
-    /*
-    private void velocidad(){
-        // Find the components
-        gauge2 = (ScLinearGauge) this.findViewById(R.id.line2);
-        assert gauge2 != null;
-
-        // Create a drawable
-        final Bitmap indicator = BitmapFactory.decodeResource(this.getResources(), R.drawable.indicator);
-
-        // Set the values.
-        gauge2.setHighValue(75);
-        gauge2.setPathTouchThreshold(100);
-
-
-        // Event
-        gauge2.setOnDrawListener(new ScGauge.OnDrawListener() {
-            @Override
-            public void onBeforeDrawCopy(ScCopier.CopyInfo info) {
-                // NOP
-            }
-
-            @Override
-            public void onBeforeDrawNotch(ScNotches.NotchInfo info) {
-                // Calculate the length
-                float min = 50.0f;
-                float max = 60.0f;
-                float current = min + (max - min) * (info.index / (float) gauge2.getNotches());
-
-                // Apply
-                info.length = gauge2.dipToPixel(current);
-            }
-
-            @Override
-            public void onBeforeDrawPointer(ScPointer.PointerInfo info) {
-                // Check if the pointer if the high pointer
-                if (info.source.getTag() == ScGauge.HIGH_POINTER_IDENTIFIER) {
-                    // Adjust the offset
-                    info.offset.x = -indicator.getWidth() / 2;
-                    info.offset.y = -indicator.getHeight() / 2 - gauge2.getStrokeSize();
-                    // Assign the bitmap to the pointer info structure
-                    info.bitmap = indicator;
-                }
-            }
-
-            @Override
-            public void onBeforeDrawToken(ScWriter.TokenInfo info) {
-                // Set angle and text
-                info.angle = 0.0f;
-                info.text = Math.round(gauge2.getHighValue()) + "%";
-
-                // Set the position
-                float distance = info.source.getDistance(gauge2.getHighValue());
-                info.offset.x = 3;
-                info.offset.y = -500;
-            }
-        });
-    }*/
 
     //create new class for connect thread
     private class refreshUI extends Thread {
@@ -358,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void run() {
                         try{
                             gauge.setHighValue(Integer.parseInt(Bluetooth.s7));
-                            m.onSpeedChanged(Float.parseFloat(Bluetooth.s8));
+                            m.onSpeedChanged(Float.parseFloat(Bluetooth.s7));
                         }catch(Exception e){
 
                         }

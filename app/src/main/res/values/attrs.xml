@@ -18,4 +18,8 @@
         <attr name="scaleTextSize2" format="dimension"></attr>
         <attr name="readingTextSize2" format="dimension"></attr>
     </declare-styleable>
+    <declare-styleable name="Marquee">
+        <attr name="scaleTextSize3" format="dimension"></attr>
+        <attr name="readingTextSize3" format="dimension"></attr>
+    </declare-styleable>
 </resources>

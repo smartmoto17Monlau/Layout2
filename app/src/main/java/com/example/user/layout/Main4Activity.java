@@ -140,7 +140,7 @@ public class Main4Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable(){
                     public void run() {
                         try{
-                            speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s8));
+                            speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s7));
                             //speedometer.onSpeedChanged(555);
                             speedometer.onBatteryChanged(Float.parseFloat(Bluetooth.s7));
                             //speedometer.onBatteryChanged(60);
