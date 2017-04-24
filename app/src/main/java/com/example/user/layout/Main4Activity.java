@@ -31,9 +31,9 @@ public class Main4Activity extends AppCompatActivity {
     Typeface type;
     Boolean uiOn = true;
 
-    private motionsensors mtsensors=null;
+    /*private motionsensors mtsensors=null;
     private SensorManager sensorManager = null;
-    private Sensor gyro = null;
+    private Sensor gyro = null;*/
 
     private Main4Activity.refreshUI refresh;
 
@@ -49,8 +49,8 @@ public class Main4Activity extends AppCompatActivity {
         clock.setTypeface(type);
 
         final Speedometer speedometer = (Speedometer) findViewById(R.id.Speedometer);
-        mtsensors = new motionsensors();
-        StartSensor();
+        //mtsensors = new motionsensors();
+        //StartSensor();
         refresh = new Main4Activity.refreshUI(speedometer);
         refresh.start();
     }
@@ -60,7 +60,7 @@ public class Main4Activity extends AppCompatActivity {
         super.onResume();
         uiOn = true;
         // enviar los cambios del sensor a la vista Gview
-        sensorManager.registerListener(mtsensors, gyro, SensorManager.SENSOR_DELAY_UI);
+        //sensorManager.registerListener(mtsensors, gyro, SensorManager.SENSOR_DELAY_UI);
         //mConnectedThread = new Main4Activity.ConnectedThread(btSocket);
         //mConnectedThread.start();
     }
@@ -68,14 +68,14 @@ public class Main4Activity extends AppCompatActivity {
     public void onPause()
     {
         super.onPause();
-        sensorManager.unregisterListener(mtsensors); //Dejar de enviar los cambios del sensor a gview
+        //sensorManager.unregisterListener(mtsensors); //Dejar de enviar los cambios del sensor a gview
         uiOn = false;
     }
 
-    private void StartSensor(){
+   /* private void StartSensor(){
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-    }
+    }*/
 
     private void cambiarRight(){
         //creamos un intent que hace referencia al segundo activity

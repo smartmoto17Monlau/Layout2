@@ -5,19 +5,19 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="93137194761469"
+    timestamp="4845562005899"
     token="2962817122979695167"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="1919" />
+        duration="525" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="103" />
+        duration="17" />
     <task
         name="verifier"
         duration="2" />
@@ -27,11 +27,11 @@
         type="MAIN" />
 
     <build
-        timestamp="99305546090107"
-        verifier="COMPATIBLE" >
+        timestamp="4845562005899"
+        verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\builds\debug\99305546090107\classes.dex"
-            type="RELOAD_DEX" />
+            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
+            type="MAIN" />
     </build>
 
 </instant-run>

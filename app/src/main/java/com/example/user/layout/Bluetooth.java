@@ -3,7 +3,10 @@ package com.example.user.layout;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,8 +14,11 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import static android.content.Context.SENSOR_SERVICE;
 
 /**
  * Created by jordimasmer on 17/02/2017.
@@ -30,6 +36,11 @@ public class Bluetooth extends Thread {
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private StringBuilder recDataString = new StringBuilder();
+    private SensorManager sensorManager = null;
+    private motionsensors mtsensors=null;
+    private Sensor gyro = null;
+    Context mContext;
+    private bbdd db;
 
     private InputStream mmInStream;
     //private OutputStream mmOutStream;
@@ -44,12 +55,29 @@ public class Bluetooth extends Thread {
     public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
     public static float max = 0;
 
-    public Bluetooth(String address){
+    public Bluetooth(String address, Context mContext) throws SQLException, ClassNotFoundException {
         this.address = address;
+        this.mContext = mContext;
         //iniciamos bluetooth socket
         init();
+
+        mtsensors = new motionsensors();
+        StartSensor();
+
+        LocationFollow loc = new LocationFollow(mContext);
+        try{
+            db = new bbdd();
+            db.start();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     public Bluetooth(){
+    }
+
+    private void StartSensor(){
+        sensorManager = (SensorManager) mContext.getSystemService(SENSOR_SERVICE);
+        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
     private void init(){
@@ -214,6 +242,8 @@ public class Bluetooth extends Thread {
         byte[] buffer = new byte[256];
         int bytes;
 
+        sensorManager.registerListener(mtsensors, gyro, SensorManager.SENSOR_DELAY_UI);
+
         // Keep looping to listen for received messages
         while (true) {
             try {
@@ -222,7 +252,7 @@ public class Bluetooth extends Thread {
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
 
-                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11);
+                //Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11);
             } catch (IOException e) {
                 break;
             }

@@ -169,6 +169,8 @@ public class Main2Activity extends AppCompatActivity {
                         s3.setText("Alcohol: "+Bluetooth.s3);
                         s4.setText("Temperature: "+Bluetooth.s4);
                         s5.setText("Humidity: "+Bluetooth.s5);
+                        s6.setText("Latitude: "+LocationFollow.latitud);
+                        s7.setText("Longitude: "+LocationFollow.longitud);
                     }
                 });
             }

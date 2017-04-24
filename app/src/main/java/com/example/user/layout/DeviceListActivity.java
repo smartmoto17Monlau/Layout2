@@ -2,6 +2,7 @@ package com.example.user.layout;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.Set;
 
 public class DeviceListActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class DeviceListActivity extends AppCompatActivity {
     // declare button for launching website and textview for connection status
     Button tlbutton;
     TextView textView1;
+    Context context = this;
 
     // EXTRA string to send on to mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
@@ -90,7 +93,14 @@ public class DeviceListActivity extends AppCompatActivity {
             /*Intent i = new Intent(DeviceListActivity.this, Main3Activity.class);
             i.putExtra("add", address);
             startActivity(i);*/
-            Bluetooth btThread = new Bluetooth(address);
+            Bluetooth btThread = null;
+            try {
+                btThread = new Bluetooth(address, context);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             btThread.start();
             Intent i = new Intent(DeviceListActivity.this, Main3Activity.class);
             startActivity(i);

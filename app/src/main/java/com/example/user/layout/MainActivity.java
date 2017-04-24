@@ -149,6 +149,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
+
     private void readGPS() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 double latitude = location.getLatitude(); //en grados
                 double longitude = location.getLongitude(); //en grados
                 double speed = location.getSpeed() * 3600 / 1000; //en km/h
-                DecimalFormat df = new DecimalFormat("000.0000");
+                DecimalFormat df = new DecimalFormat("000.0000000");
                 //guardamos las ultimas coordenadas en las que hemos estado
                 latitud = latitude;
                 longitud = longitude;
