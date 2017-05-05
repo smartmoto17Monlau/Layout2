@@ -3,6 +3,7 @@ package com.example.user.layout;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -26,9 +28,12 @@ public class Main3Activity extends AppCompatActivity {
     ImageButton main, map, options, exit;
     TextClock clock;
     Typeface type;
+    Context context = this;
+
+    private static boolean isbtOn;
 
     // String for MAC address
-    private static String address;
+    private static String address = "20:16:01:26:18:71";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,24 @@ public class Main3Activity extends AppCompatActivity {
         listeners();
         type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
+
+        if(!Bluetooth.isbtOn){
+            Bluetooth btThread = null;
+            try {
+                btThread = new Bluetooth(address, context);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            btThread.start();
+            Bluetooth.isbtOn = true;
+        }
+        Avisos.bucle = true;
+        Avisos.thread = true;
+        Avisos.context = this;
+        Avisos aviso = new Avisos(this);
+        aviso.start();
 
     }
 
@@ -52,6 +75,9 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
     private void cambiarMap(){
@@ -59,6 +85,9 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, MainActivity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
     private void cambiarData(){
@@ -66,6 +95,9 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, Main2Activity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
 

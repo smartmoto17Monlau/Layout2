@@ -26,8 +26,11 @@ public class bbdd  extends Thread{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+
         while(true){
            try {
+
                Thread.sleep(10000);
                Log.i("aaa", "10s");
            }catch (InterruptedException e) {

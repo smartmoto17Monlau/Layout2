@@ -42,6 +42,7 @@ public class Bluetooth extends Thread {
     Context mContext;
     private bbdd db;
 
+
     private InputStream mmInStream;
     //private OutputStream mmOutStream;
 
@@ -54,6 +55,7 @@ public class Bluetooth extends Thread {
     //variables globales de sensores
     public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
     public static float max = 0;
+    public static  boolean isbtOn = false;
 
     public Bluetooth(String address, Context mContext) throws SQLException, ClassNotFoundException {
         this.address = address;

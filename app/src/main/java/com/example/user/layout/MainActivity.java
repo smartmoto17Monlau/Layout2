@@ -111,6 +111,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         referencias();
 
+        Avisos.bucle = true;
+        Avisos.thread = true;
+        Avisos.context = this;
+        Avisos aviso = new Avisos(this);
+        aviso.start();
+
         type = Typeface.createFromAsset(getAssets(), "fonts/GeosansLight.ttf");
         //tvScroll.setTypeface(type);
         type = Typeface.createFromAsset(getAssets(), "fonts/DS-DIGI.TTF");
@@ -202,18 +208,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
     private void cambiarLeft(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main4Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
     private void cambiarMenu(){
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main3Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Avisos.bucle = false;
+        Avisos.thread = false;
+        Avisos.context = null;
         startActivity(intent);
     }
 
