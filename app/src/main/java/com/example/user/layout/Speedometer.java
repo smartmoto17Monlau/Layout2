@@ -334,14 +334,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 
 	private void drawScale2(Canvas canvas){
 		onPath.reset();
-		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+		for(int i = -360; i <= ((currentBattery*2)/mMaxSpeed)*360 - 360; i+=4){
 			onPath.addArc(oval2, i, 2f);
 		}
 
-		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+		if(getCurrentBattery() <= 30 && getCurrentBattery() > 15){
 			offMarkPaint.setColor(Color.YELLOW);
 			canvas.drawPath(onPath, offMarkPaint);
-		}else if(getCurrentBattery() <= 35){
+		}else if(getCurrentBattery() <= 15){
 			offMarkPaint.setColor(Color.RED);
 			canvas.drawPath(onPath, offMarkPaint);
 		}else{
@@ -351,7 +351,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	}
 
 	private void drawReading2(Canvas canvas) {
-		String message = String.format("%d", (int) this.currentBattery / 2);
+		String message = String.format("%d", (int) this.currentBattery);
 		readingPaint.setTextSize(150);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(BATTERY_COLOR);

@@ -23,7 +23,7 @@ public class motionsensors implements SensorEventListener {
         roll = sensorEvent.values[2]*100;
         */
         updateOrientation(sensorEvent.values);
-        Log.d("Datos motionsensor",""+azimuth+" "+pitch+" "+roll);
+        //Log.d("Datos motionsensor",""+azimuth+" "+pitch+" "+roll);
     }
 
     @Override

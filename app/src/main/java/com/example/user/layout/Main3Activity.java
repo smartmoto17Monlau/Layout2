@@ -29,6 +29,7 @@ public class Main3Activity extends AppCompatActivity {
     TextClock clock;
     Typeface type;
     Context context = this;
+    Avisos aviso;
 
     private static boolean isbtOn;
 
@@ -57,12 +58,13 @@ public class Main3Activity extends AppCompatActivity {
             btThread.start();
             Bluetooth.isbtOn = true;
         }
-        Avisos.bucle = true;
-        Avisos.thread = true;
         Avisos.context = this;
-        Avisos aviso = new Avisos(this);
-        aviso.start();
 
+        if(Avisos.isON){
+            Avisos.isON = false;
+            aviso = new Avisos();
+            aviso.start();
+        }
     }
 
     @Override
@@ -75,8 +77,6 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, Main4Activity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -85,8 +85,6 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, MainActivity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -95,8 +93,6 @@ public class Main3Activity extends AppCompatActivity {
         Intent intent = new Intent(Main3Activity.this, Main2Activity.class);
         intent.putExtra("add", address);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }

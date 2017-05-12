@@ -42,11 +42,7 @@ public class Main2Activity extends AppCompatActivity {
         listeners();
         setTypeface();
 
-        Avisos.bucle = true;
-        Avisos.thread = true;
         Avisos.context = this;
-        Avisos aviso = new Avisos(this);
-        aviso.start();
 
         refresh = new Main2Activity.refreshUI();
         refresh.start();
@@ -69,8 +65,6 @@ public class Main2Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, Main4Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -78,8 +72,6 @@ public class Main2Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -87,8 +79,6 @@ public class Main2Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main2Activity.this, Main3Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }

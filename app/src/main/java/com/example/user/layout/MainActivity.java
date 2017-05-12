@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private MainActivity.refreshUI refresh;
 
-
-
     //variables globales
     private double latitud = 0, longitud = 0;
     private boolean firstTime = true;
@@ -111,11 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         referencias();
 
-        Avisos.bucle = true;
-        Avisos.thread = true;
         Avisos.context = this;
-        Avisos aviso = new Avisos(this);
-        aviso.start();
 
         type = Typeface.createFromAsset(getAssets(), "fonts/GeosansLight.ttf");
         //tvScroll.setTypeface(type);
@@ -154,8 +148,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         clock =(TextClock) findViewById(R.id.textClock1);
 
     }
-
-
 
     private void readGPS() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -208,8 +200,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -217,8 +207,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main4Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -226,8 +214,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(MainActivity.this, Main3Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -316,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 runOnUiThread(new Runnable(){
                     public void run() {
                         try{
-                            gauge.setHighValue(Integer.parseInt(Bluetooth.s7));
+                            gauge.setHighValue(Integer.parseInt(Bluetooth.s5));
                             m.onSpeedChanged(Float.parseFloat(Bluetooth.s7));
                         }catch(Exception e){
 

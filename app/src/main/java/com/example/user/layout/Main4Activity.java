@@ -48,11 +48,7 @@ public class Main4Activity extends AppCompatActivity {
         type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
 
-        Avisos.bucle = true;
-        Avisos.thread = true;
         Avisos.context = this;
-        Avisos aviso = new Avisos(this);
-        aviso.start();
 
         final Speedometer speedometer = (Speedometer) findViewById(R.id.Speedometer);
         //mtsensors = new motionsensors();
@@ -87,8 +83,6 @@ public class Main4Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -96,8 +90,6 @@ public class Main4Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, Main2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -105,8 +97,6 @@ public class Main4Activity extends AppCompatActivity {
         //creamos un intent que hace referencia al segundo activity
         Intent intent = new Intent(Main4Activity.this, Main3Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Avisos.bucle = false;
-        Avisos.thread = false;
         Avisos.context = null;
         startActivity(intent);
     }
@@ -157,7 +147,7 @@ public class Main4Activity extends AppCompatActivity {
                         try{
                             speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s7));
                             //speedometer.onSpeedChanged(555);
-                            speedometer.onBatteryChanged(Float.parseFloat(Bluetooth.s7));
+                            speedometer.onBatteryChanged(Float.parseFloat(Bluetooth.s13));
                             //speedometer.onBatteryChanged(60);
                             speedometer.onBatteryTempChanged(Float.parseFloat(Bluetooth.s3));
                             speedometer.onMotorTempChanged(Float.parseFloat(Bluetooth.s5));

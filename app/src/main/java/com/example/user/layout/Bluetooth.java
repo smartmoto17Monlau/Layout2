@@ -53,7 +53,7 @@ public class Bluetooth extends Thread {
     private static String address;
 
     //variables globales de sensores
-    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
+    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13;
     public static float max = 0;
     public static  boolean isbtOn = false;
 
@@ -107,6 +107,7 @@ public class Bluetooth extends Thread {
                         String sensor10 = "";
                         String sensor11 = "";
                         String sensor12 = "";
+                        String sensor13 = "";
 
                         if (recDataString.charAt(0) == '#')       //if it starts with # we know it is what we are looking for
                         {
@@ -121,57 +122,76 @@ public class Bluetooth extends Thread {
                                         sensor0 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("0"," ");
                                     }else if(currentSensor == 1){
                                         sensor1 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("1"," ");
                                     }else if (currentSensor == 2){
                                         sensor2 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("2"," ");
                                     }else if (currentSensor == 3){
                                         sensor3 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("3"," ");
                                     }else if (currentSensor == 4){
                                         sensor4 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("4"," ");
                                     }else if (currentSensor == 5){
                                         sensor5 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                       //Log.d("5"," ");
                                     }else if (currentSensor == 6){
                                         sensor6 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("6"," ");
                                     }else if (currentSensor == 7){
                                         sensor7 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("7"," ");
                                     }else if (currentSensor == 8){
                                         sensor8 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("8"," ");
                                     }else if (currentSensor == 9){
                                         sensor9 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("9"," ");
                                     }
                                     else if (currentSensor == 10){
                                         sensor10 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("10"," ");
                                     }
                                     else if (currentSensor == 11){
                                         sensor11 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
+                                        //Log.d("11"," ");
                                     }
                                     else if (currentSensor == 12){
                                         sensor12 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
+                                        currentSensor++;
+                                        //Log.d("12"," ");
+                                    }
+                                    else if (currentSensor == 13){
+                                        sensor13 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
                                         currentSensor = 0;
+                                        //Log.d("13"," ");
                                     }
                                 }else if(arrayLetras[i] == '~'){
                                     currentSensor = 0;
@@ -193,6 +213,7 @@ public class Bluetooth extends Thread {
                             s10 = sensor10;
                             s11 = sensor11;
                             s12 = sensor12;
+                            s13 = sensor13;
                         }
                         recDataString.delete(0, recDataString.length());   //clear all string data
                     }
@@ -254,7 +275,7 @@ public class Bluetooth extends Thread {
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
 
-                //Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11);
+                //Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11+ " "+s12+ " "+s13);
             } catch (IOException e) {
                 break;
             }
