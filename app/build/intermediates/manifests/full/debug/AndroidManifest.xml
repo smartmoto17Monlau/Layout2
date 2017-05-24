@@ -43,7 +43,7 @@
             android:value="@string/google_android_map_api_key" />
 
         <activity
-            android:name="com.example.user.layout.Main3Activity"
+            android:name="com.example.user.layout.layout.Main3Activity"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,9 +51,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.user.layout.Main2Activity" />
-        <activity android:name="com.example.user.layout.MainActivity" />
-        <activity android:name="com.example.user.layout.Main4Activity" />
+        <activity android:name="com.example.user.layout.layout.Main2Activity" />
+        <activity android:name="com.example.user.layout.layout.MainActivity" />
+        <activity android:name="com.example.user.layout.layout.Main4Activity" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

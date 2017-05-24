@@ -65,7 +65,7 @@
         android:orientation="horizontal"
         android:weightSum="20">
 
-        <com.example.user.layout.Speedometer
+        <com.example.user.layout.canvas.Speedometer
             android:id="@+id/Speedometer"
             android:layout_width="match_parent"
             android:layout_height="930dp"

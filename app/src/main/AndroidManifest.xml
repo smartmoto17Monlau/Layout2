@@ -20,7 +20,7 @@
             android:value="@string/google_android_map_api_key" />
 
         <activity
-            android:name=".Main3Activity"
+            android:name=".layout.Main3Activity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Main4Activity" />
+        <activity android:name=".layout.Main2Activity" />
+        <activity android:name=".layout.MainActivity" />
+        <activity android:name=".layout.Main4Activity" />
     </application>
 
 </manifest>
