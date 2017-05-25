@@ -28,7 +28,8 @@ public class TcpAviso extends Thread {
         do{
             try{
                 Socket clientSocket = new Socket();
-                clientSocket.connect(new InetSocketAddress("172.31.4.8", port[i]), 1000);
+                //clientSocket.connect(new InetSocketAddress("172.31.4.8", 9009/*port[i]*/), 1500);
+                clientSocket.connect(new InetSocketAddress("192.168.43.185", 9009/*port[i]*/), 1500);
                 //Socket clientSocket = new Socket("172.31.4.8", port[i]);
                 DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
                 outToServer.writeInt(tipo);

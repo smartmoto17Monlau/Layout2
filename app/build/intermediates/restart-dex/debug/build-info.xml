@@ -5,13 +5,13 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="73757519381714"
+    timestamp="256821856043908"
     token="2962817122979695167"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="858" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
@@ -23,14 +23,14 @@
         duration="0" />
 
     <build
-        timestamp="69404428534176"
+        timestamp="256635230372598"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="73757519381714"
+        timestamp="256821856043908"
         verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
