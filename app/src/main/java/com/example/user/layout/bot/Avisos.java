@@ -50,8 +50,8 @@ public class Avisos extends Thread {
                     }*/
                     yes = false;
                     if((motionsensors.azimuth >= 160 || motionsensors.azimuth <= 10)
-                            || (motionsensors.pitch >= 85 || motionsensors.pitch <= -85)
-                            || (Integer.parseInt(Bluetooth.s13) <= 10) && isBtHelped){
+                            || (motionsensors.pitch >= 85 || motionsensors.pitch <= -85)){
+                            //|| (Integer.parseInt(Bluetooth.s13) <= 10) && isBtHelped){
                         bucle = false;
                         isBtHelped =false;;
                         wait = true;
@@ -81,7 +81,7 @@ public class Avisos extends Thread {
 
                         while(wait){
                             Thread.sleep(1000);
-                            Log.i("aaa: ", "waiting");
+                            Log.i("Avisos: ", "waiting");
                         }
 
                         if(!yes){

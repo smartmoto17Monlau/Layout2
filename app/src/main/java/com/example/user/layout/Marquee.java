@@ -59,9 +59,9 @@ public class Marquee extends View {
 
     @Override
     public void onDraw(Canvas canvas){
-        canvas.drawText("Temp: "+ Bluetooth.s4+"ºC", pos1x, 80, p);
-        canvas.drawText("Hum: "+Bluetooth.s5+"%", pos2x, 80, p);
-        canvas.drawText("PA: "+Bluetooth.s6+"HPa", pos3x, 80, p);
+        canvas.drawText("Temp: "+ Bluetooth.s0+"ºC", pos1x, 80, p);
+        canvas.drawText("Hum: "+Bluetooth.s1+"%", pos2x, 80, p);
+        canvas.drawText("PA: "+Bluetooth.s2+"HPa", pos3x, 80, p);
         canvas.drawText("CO: "+Bluetooth.s8+"ppm", pos4x, 80, p);
         canvas.drawText("RAD: "+Bluetooth.s12+"uSv", pos5x, 80, p);
         this.invalidate();

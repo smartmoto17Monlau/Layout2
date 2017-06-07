@@ -13,7 +13,6 @@
 
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/Topbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -47,14 +46,23 @@
             android:textStyle="bold"
             android:textColorHighlight="@color/yelow"/>
 
+        <ImageButton
+            android:id="@+id/sos"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/sosbutton"
+            android:layout_marginLeft="280dp"
+            android:focusable="false"
+            android:scaleX="0.9"
+            android:scaleY="0.9"/>
 
         <ImageButton
             android:id="@+id/cambioDe"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="355dp"
-            android:focusable="false"/>
+            android:layout_marginLeft="15dp"
+            android:focusable="false" />
 
 
     </LinearLayout>

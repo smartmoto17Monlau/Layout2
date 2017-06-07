@@ -10,6 +10,7 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.user.layout.bot.Avisos;
+import com.example.user.layout.bot.TcpAviso;
 import com.example.user.layout.sensors.Bluetooth;
 import com.example.user.layout.sensors.LocationFollow;
 import com.example.user.layout.R;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
 public class Main2Activity extends AppCompatActivity {
 
     //variables globales
-    ImageButton menu, right, left;
+    ImageButton menu, right, left, sos;
     TextClock clock;
     TextView title, title2, s0, s1, s2, s3, s4, s5, s6, s7, s8, sb0, sb1, sb2, sb3, sb4, sb5, sb6, sb7, sb8;
     Typeface type, fuente;
@@ -128,6 +129,7 @@ public class Main2Activity extends AppCompatActivity {
         sb6 = (TextView) findViewById(R.id.bs6);
         sb7 = (TextView) findViewById(R.id.bs7);
         sb8 = (TextView) findViewById(R.id.bs8);
+        sos = (ImageButton) findViewById(R.id.sos);
     }
 
     private void listeners(){
@@ -149,6 +151,13 @@ public class Main2Activity extends AppCompatActivity {
                 cambiarMenu();
             }
         });
+        sos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TcpAviso tcp = new TcpAviso(2);
+                tcp.start();
+            }
+        });
     }
 
     //create new class for connect thread
@@ -163,14 +172,24 @@ public class Main2Activity extends AppCompatActivity {
             public void run() {
                 runOnUiThread(new Runnable(){
                     public void run() {
-                        s0.setText("Propane: "+ Bluetooth.s0);
-                        s1.setText("Hydrogen: "+Bluetooth.s1);
-                        s2.setText("Propane: "+Bluetooth.s2);
-                        s3.setText("Alcohol: "+Bluetooth.s3);
-                        s4.setText("Temperature: "+Bluetooth.s4);
-                        s5.setText("Humidity: "+Bluetooth.s5);
-                        s6.setText("Latitude: "+ LocationFollow.latitud);
-                        s7.setText("Longitude: "+LocationFollow.longitud);
+                        s0.setText("Temperature: "+ Bluetooth.s0 + " ºC");
+                        s1.setText("Humidity: "+Bluetooth.s1 + " %");
+                        s2.setText("Pressure: "+Bluetooth.s2 + " hPa");
+                        s3.setText("Height: "+Bluetooth.s3 + " m");
+                        s4.setText("LPG: "+Bluetooth.s4 + " ppm");
+                        s5.setText("Propane: "+Bluetooth.s5+ " ppm");
+                        s6.setText("Natural Gas: "+ Bluetooth.s6+ " ppm");
+                        s7.setText("Butane: "+Bluetooth.s7+ " ppm");
+                        s8.setText("Carbon Monoxide: "+Bluetooth.s8+ " ppm");
+                        sb0.setText("Hydrogen: "+Bluetooth.s9+ " ppm");
+                        sb1.setText("Methane: "+Bluetooth.s10+ " ppm");
+                        sb2.setText("CO2: "+Bluetooth.s11 + " ppm");
+                        sb3.setText("Radiation: "+Bluetooth.s12+ " uSv/h");
+                        sb4.setText("Battery Temp: "+Bluetooth.s16 + " ºC");
+                        sb5.setText("Motor Temp: "+Bluetooth.s15 + " ºC");
+                        sb7.setText("Latitude: "+LocationFollow.latitud);
+                        sb6.setText("Longitude: "+LocationFollow.longitud);
+                        sb8.setText("Speed: "+Bluetooth.s14 +" Km/H");
                     }
                 });
             }

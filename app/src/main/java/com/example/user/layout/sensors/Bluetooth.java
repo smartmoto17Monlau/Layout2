@@ -7,6 +7,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.user.layout.bot.bbdd;
 
@@ -51,7 +52,7 @@ public class Bluetooth extends Thread {
     private static String address;
 
     //variables globales de sensores
-    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14;
+    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16;
     public static float max = 0;
     public static  boolean isbtOn = false;
 
@@ -107,6 +108,8 @@ public class Bluetooth extends Thread {
                         String sensor12 = "";
                         String sensor13 = "";
                         String sensor14 = "";
+                        String sensor15 = "";
+                        String sensor16 = "";
 
                         if (recDataString.charAt(0) == '#')       //if it starts with # we know it is what we are looking for
                         {
@@ -189,11 +192,21 @@ public class Bluetooth extends Thread {
                                     else if (currentSensor == 13){
                                         sensor13 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
-                                        currentSensor = 14;
+                                        currentSensor++;
                                         //Log.d("13"," ");
                                     }
                                     else if (currentSensor == 14){
                                         sensor14 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                        //Log.d("14"," ");
+                                    }else if (currentSensor == 15){
+                                        sensor15 = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        currentSensor++;
+                                        //Log.d("14"," ");
+                                    }else if (currentSensor == 16){
+                                        sensor16 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor = 0;
                                         //Log.d("14"," ");
@@ -220,6 +233,8 @@ public class Bluetooth extends Thread {
                             s12 = sensor12;
                             s13 = sensor13;
                             s14 = sensor14;
+                            s15 = sensor15;
+                            s16 = sensor16;
                         }
                         recDataString.delete(0, recDataString.length());   //clear all string data
                     }
@@ -281,7 +296,7 @@ public class Bluetooth extends Thread {
                 // Send the obtained bytes to the UI Activity via handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
 
-                //Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11+ " "+s12+ " "+s13+ " "+s14);
+                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11+ " "+s12+ " "+s13+ " "+s14+ " "+s15+" "+s16);
             } catch (IOException e) {
                 break;
             }

@@ -19,6 +19,7 @@ import android.widget.TextClock;
 import android.widget.Toast;
 
 import com.example.user.layout.bot.Avisos;
+import com.example.user.layout.bot.TcpAviso;
 import com.example.user.layout.sensors.Bluetooth;
 import com.example.user.layout.canvas.Meters;
 import com.example.user.layout.R;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     MapView mapView;
     //TextView tvScroll;
     Typeface type;
-    ImageButton menu, right, left;
+    ImageButton menu, right, left, sos;
     TextClock clock;
 
     ScLinearGauge gauge = null;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         left = (ImageButton) findViewById(R.id.cambioIz);
         menu = (ImageButton) findViewById(R.id.Menu);
         clock =(TextClock) findViewById(R.id.textClock1);
-
+        sos = (ImageButton) findViewById(R.id.sos);
     }
 
     private void readGPS() {
@@ -239,6 +240,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 cambiarMenu();
             }
         });
+        sos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TcpAviso tcp = new TcpAviso(2);
+                tcp.start();
+            }
+        });
+
     }
 
     private void bateria(){

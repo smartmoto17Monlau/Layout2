@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextClock;
 
 import com.example.user.layout.bot.Avisos;
+import com.example.user.layout.bot.TcpAviso;
 import com.example.user.layout.sensors.Bluetooth;
 import com.example.user.layout.R;
 import com.example.user.layout.canvas.Speedometer;
@@ -18,14 +19,10 @@ import java.util.TimerTask;
 
 public class Main4Activity extends AppCompatActivity {
 
-    ImageButton menu, right, left;
+    ImageButton menu, right, left, sos;
     TextClock clock;
     Typeface type;
     Boolean uiOn = true;
-
-    /*private motionsensors mtsensors=null;
-    private SensorManager sensorManager = null;
-    private Sensor gyro = null;*/
 
     private Main4Activity.refreshUI refresh;
 
@@ -43,8 +40,6 @@ public class Main4Activity extends AppCompatActivity {
         Avisos.context = this;
 
         final Speedometer speedometer = (Speedometer) findViewById(R.id.Speedometer);
-        //mtsensors = new motionsensors();
-        //StartSensor();
         refresh = new Main4Activity.refreshUI(speedometer);
         refresh.start();
     }
@@ -53,23 +48,13 @@ public class Main4Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         uiOn = true;
-        // enviar los cambios del sensor a la vista Gview
-        //sensorManager.registerListener(mtsensors, gyro, SensorManager.SENSOR_DELAY_UI);
-        //mConnectedThread = new Main4Activity.ConnectedThread(btSocket);
-        //mConnectedThread.start();
     }
     @Override
     public void onPause()
     {
         super.onPause();
-        //sensorManager.unregisterListener(mtsensors); //Dejar de enviar los cambios del sensor a gview
         uiOn = false;
     }
-
-   /* private void StartSensor(){
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-    }*/
 
     private void cambiarRight(){
         //creamos un intent que hace referencia al segundo activity
@@ -98,6 +83,7 @@ public class Main4Activity extends AppCompatActivity {
         left = (ImageButton) findViewById(R.id.cambioIz);
         menu = (ImageButton) findViewById(R.id.Menu);
         clock =(TextClock) findViewById(R.id.textClock1);
+        sos = (ImageButton) findViewById(R.id.sos);
     }
 
 
@@ -120,7 +106,13 @@ public class Main4Activity extends AppCompatActivity {
                 cambiarMenu();
             }
         });
-
+        sos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TcpAviso tcp = new TcpAviso(2);
+                tcp.start();
+            }
+        });
     }
 
     //create new class for connect thread
@@ -137,13 +129,10 @@ public class Main4Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable(){
                     public void run() {
                         try{
-                            speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s14));
-                            //speedometer.onSpeedChanged(555);
                             speedometer.onBatteryChanged(Float.parseFloat(Bluetooth.s13));
-                            //speedometer.onBatteryChanged(60);
-                            speedometer.onBatteryTempChanged(Float.parseFloat(Bluetooth.s3));
-                            speedometer.onMotorTempChanged(Float.parseFloat(Bluetooth.s5));
-
+                            speedometer.onSpeedChanged(Float.parseFloat(Bluetooth.s14));
+                            speedometer.onMotorTempChanged(Float.parseFloat(Bluetooth.s16));
+                            speedometer.onBatteryTempChanged(Float.parseFloat(Bluetooth.s15));
                         }catch(Exception e){
 
                         }

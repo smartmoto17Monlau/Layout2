@@ -369,10 +369,10 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private void drawInfo(Canvas canvas){
 		smallScale.setTextSize(40);
 		smallScale.setTypeface(type2);
-		canvas.drawText("TEMP: "+ Bluetooth.s4+"ºC", 0, 750, smallScale);
-		canvas.drawText("HUM: "+Bluetooth.s5+"%", 0, 800, smallScale);
-		canvas.drawText("HGT: "+Bluetooth.s7+"m", 0, 850, smallScale);
-		canvas.drawText("PA: "+Bluetooth.s6+"Hpa", 0, 900, smallScale);
+		canvas.drawText("TEMP: "+ Bluetooth.s0+"ºC", 0, 750, smallScale);
+		canvas.drawText("HUM: "+Bluetooth.s1+"%", 0, 800, smallScale);
+		canvas.drawText("HGT: "+Bluetooth.s4+"m", 0, 850, smallScale);
+		canvas.drawText("PA: "+Bluetooth.s3+"Hpa", 0, 900, smallScale);
 	}
 
 	private void drawScaleBackground3(Canvas canvas){
@@ -386,14 +386,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 
 	private void drawScale3(Canvas canvas){
 		onPath.reset();
-		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+		for(int i = -360; i <= ((mCurrentBatteryTemp*2)/mMaxSpeed)*360 - 360; i+=4){
 			onPath.addArc(oval3, i, 2f);
 		}
 
-		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+		if(mCurrentBatteryTemp <= 60 && mCurrentBatteryTemp > 30){
 			offMarkPaint.setColor(Color.YELLOW);
 			canvas.drawPath(onPath, offMarkPaint);
-		}else if(getCurrentBattery() <= 35){
+		}else if(mCurrentBatteryTemp <= 35){
 			offMarkPaint.setColor(Color.RED);
 			canvas.drawPath(onPath, offMarkPaint);
 		}else{
@@ -402,7 +402,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}
 	}
 	private void drawReading3(Canvas canvas){
-		String message = String.format("%d", (int)this.mCurrentMotorTemp / 2);
+		String message = String.format("%d", (int)this.mCurrentMotorTemp);
 		readingPaint.setTextSize(100);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);
@@ -422,14 +422,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 
 	private void drawScale4(Canvas canvas){
 		onPath.reset();
-		for(int i = -360; i <= (currentBattery/mMaxSpeed)*360 - 360; i+=4){
+		for(int i = -360; i <= ((mCurrentMotorTemp)*2/mMaxSpeed)*360 - 360; i+=4){
 			onPath.addArc(oval4, i, 2f);
 		}
 
-		if(getCurrentBattery() <= 60 && getCurrentBattery() > 30){
+		if(mCurrentMotorTemp <= 60 && mCurrentMotorTemp > 30){
 			offMarkPaint.setColor(Color.YELLOW);
 			canvas.drawPath(onPath, offMarkPaint);
-		}else if(getCurrentBattery() <= 35){
+		}else if(mCurrentMotorTemp <= 35){
 			offMarkPaint.setColor(Color.RED);
 			canvas.drawPath(onPath, offMarkPaint);
 		}else{
@@ -438,7 +438,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}
 	}
 	private void drawReading4(Canvas canvas){
-		String message = String.format("%d", (int)this.mCurrentBatteryTemp / 2);
+		String message = String.format("%d", (int)this.mCurrentBatteryTemp);
 		readingPaint.setTextSize(100);
 		readingPaint.setTypeface(type);
 		readingPaint.setColor(VALUE_COLOR);

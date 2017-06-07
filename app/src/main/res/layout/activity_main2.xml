@@ -45,13 +45,22 @@
             android:textStyle="bold"
             android:textColorHighlight="@color/yelow"/>
 
+        <ImageButton
+            android:id="@+id/sos"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/sosbutton"
+            android:layout_marginLeft="280dp"
+            android:focusable="false"
+            android:scaleX="0.9"
+            android:scaleY="0.9"/>
 
         <ImageButton
             android:id="@+id/cambioDe"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/arrow"
-            android:layout_marginLeft="355dp"
+            android:layout_marginLeft="15dp"
             android:focusable="false"/>
 
     </LinearLayout>
@@ -80,18 +89,20 @@
                 android:gravity="center"
                 android:textColor="#bfbb6b"
                 android:id="@+id/title"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Humidity: ---"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:textSize="25dp"
-                android:id="@+id/s0"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Temperature: ---"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="25dp"
+                android:id="@+id/s0"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Humidity: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -107,23 +118,25 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Propane: ---"
+                android:text="Height: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
                 android:id="@+id/s3"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Hydrogen: ---"
+                android:text="LPG: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
                 android:id="@+id/s4"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Alcohol: ---"
+                android:text="Propane: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -131,7 +144,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Methane: ---"
+                android:text="Natural Gas: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -140,7 +153,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Amonia: ---"
+                android:text="Butane: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -168,7 +181,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Bike sensor Data:"
+                android:text=""
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:textSize="30dp"
@@ -178,7 +191,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Engine Temp: ---"
+                android:text="Hydrogen: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -186,7 +199,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Temperature: ---"
+                android:text="Methane: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -194,7 +207,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Pressure: ---"
+                android:text="CO2: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -202,31 +215,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Propane: ---"
+                android:text="Radiation: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
                 android:id="@+id/bs3"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Hydrogen: ---"
+                android:text="Battery Temp: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
                 android:id="@+id/bs4"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Alcohol: ---"
+                android:text="Motor Temp: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
                 android:id="@+id/bs5"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Methane: ---"
+                android:text="Longitude: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -235,7 +251,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Amonia: ---"
+                android:text="Latitude: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"
@@ -243,7 +259,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Carbon Monoxide: ---"
+                android:text="Speed: ---"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:textSize="25dp"

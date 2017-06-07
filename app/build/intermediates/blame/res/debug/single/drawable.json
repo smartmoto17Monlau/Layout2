@@ -256,6 +256,10 @@
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\src\\main\\res\\drawable\\indicator.png"
     },
     {
+        "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\sosbutton.png",
+        "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\src\\main\\res\\drawable\\sosbutton.png"
+    },
+    {
         "merged": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\cast_ic_notification_skip_prev.xml",
         "source": "C:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-cast-framework\\9.6.0\\res\\drawable\\cast_ic_notification_skip_prev.xml"
     },
