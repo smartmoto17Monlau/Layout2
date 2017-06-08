@@ -1,4 +1,4 @@
-#Wed Jun 07 09:32:41 CEST 2017
+#Thu Jun 08 17:59:18 CEST 2017
 base.0=C\:\\Users\\jordimasmer\\AndroidStudioProjects\\SmartMoto17\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_4666b543049b6a946d6eeb0f69e55fb9ef9c0e4d
 renamed.1=classes.dex
 renamed.0=classes2.dex

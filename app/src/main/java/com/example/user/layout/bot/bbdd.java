@@ -18,8 +18,6 @@ public class bbdd  extends Thread{
     static Connection c = null;
     static Statement stmt = null;
 
-    /*public bbdd() throws SQLException, ClassNotFoundException {
-    }*/
 
     public void run(){
         try {

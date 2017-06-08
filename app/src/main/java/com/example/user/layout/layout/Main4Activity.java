@@ -19,27 +19,30 @@ import java.util.TimerTask;
 
 public class Main4Activity extends AppCompatActivity {
 
+    //variables globales
     ImageButton menu, right, left, sos;
     TextClock clock;
     Typeface type;
     Boolean uiOn = true;
-
     private Main4Activity.refreshUI refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
-
+        //traemos referenciasy declaramos listeners
         referencias();
         listeners();
 
+        //cramos la fuente y la cambiamos en el textclock
         type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
 
+        //cambiamos el context del thread avisos
         Avisos.context = this;
-
+        //inicializamos el canvas
         final Speedometer speedometer = (Speedometer) findViewById(R.id.Speedometer);
+        //inicializamos el thread que actualiza la UI y lo empezamos
         refresh = new Main4Activity.refreshUI(speedometer);
         refresh.start();
     }
@@ -78,6 +81,7 @@ public class Main4Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //referencias
     private void referencias(){
         right = (ImageButton) findViewById(R.id.cambioDe);
         left = (ImageButton) findViewById(R.id.cambioIz);
@@ -86,7 +90,7 @@ public class Main4Activity extends AppCompatActivity {
         sos = (ImageButton) findViewById(R.id.sos);
     }
 
-
+    //listeners
     private void listeners(){
         right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +119,7 @@ public class Main4Activity extends AppCompatActivity {
         });
     }
 
-    //create new class for connect thread
+    //thread que actualiza los valores de la layout de forma paralela
     private class refreshUI extends Thread {
         Speedometer speedometer;
         Timer timer;

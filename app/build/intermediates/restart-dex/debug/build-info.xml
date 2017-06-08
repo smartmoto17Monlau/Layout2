@@ -5,72 +5,27 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="11342166555850"
+    timestamp="30733247661165"
     token="2962817122979695167"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="358" />
+        duration="2238" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="17" />
+        duration="88" />
     <task
         name="verifier"
-        duration="1" />
+        duration="3" />
 
     <artifact
-        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
-        type="DEX" />
+        location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
+        type="MAIN" />
 
-    <build
-        timestamp="2810323010292"
-        verifier="FULL_BUILD_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\outputs\apk\app-debug.apk"
-            type="MAIN" />
-    </build>
-    <build
-        timestamp="3040683462255"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_3\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="4638973316295"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="5902537723119"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-            type="RESOURCES" />
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="7192221230919"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="11342166555850"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jordimasmer\AndroidStudioProjects\SmartMoto17\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
-            type="DEX" />
-    </build>
     <build
         timestamp="760670825156906"
         verifier="FULL_BUILD_REQUESTED" >

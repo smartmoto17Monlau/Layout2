@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     ScLinearGauge gauge = null;
     ScLinearGauge gauge2 = null;
 
+    //declaramos thread que actualiza
     private MainActivity.refreshUI refresh;
 
     //variables globales
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onPause();
     }
 
+    //metodo que se encarga de cargar el mapa de google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng  tuLocation = new LatLng(latitud, longitud);
         googleMap.addMarker(new MarkerOptions().position(tuLocation).title("Marker en tu posicion"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tuLocation, zoomLevel));
-        //googleMap.setMapStyle();
         listeners();
     }
 
@@ -106,24 +107,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //traemos referencias del layout
         referencias();
-
+        //guardamos el context actual en avisos
         Avisos.context = this;
-
+        //creamos las fuentes y las asignamos donde toca
         type = Typeface.createFromAsset(getAssets(), "fonts/GeosansLight.ttf");
-        //tvScroll.setTypeface(type);
         type = Typeface.createFromAsset(getAssets(), "fonts/DS-DIGI.TTF");
         clock.setTypeface(type);
         mapView.onCreate(savedInstanceState);
-        //tvScroll.setSelected(true);
-
+        //metodo que llama al inicializador del medidor de bateria
         bateria();
-        //velocidad();
+        //creamos una instancia del canvas que dibuja el medidor de velocidad
         final Meters meters = (Meters) findViewById(R.id.meter);
+        //inicializamos el thread que se encarga de actualizar los datos
         refresh = new MainActivity.refreshUI(gauge, gauge2, meters);
         refresh.start();
-
+        //comprobamos que tenemos permisos de localizacion
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -134,10 +134,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        //cargamos mapa asyncronamente
         mapView.getMapAsync(this);
+        //declaramos listeners
         listeners();
     }
 
+    //referencias
     private void referencias(){
         mapView = (MapView) findViewById(R.id.mapview);
         //tvScroll = (TextView) findViewById(R.id.textViewScroll);
@@ -149,25 +152,28 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         sos = (ImageButton) findViewById(R.id.sos);
     }
 
+    //metodo que lee los datos del gps
     private void readGPS() {
+        //iniciamos un locationmanager con nuestro servicio de location
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        //cramos un location listener
         LocationListener locationListener = new LocationListener() {
+            //si ela posicion se actualiza
             public void onLocationChanged(Location location) {
-
+                //guardamos los datos que proporciona el gps en variables
                 double altitude = location.getAltitude(); //en metros
                 double latitude = location.getLatitude(); //en grados
                 double longitude = location.getLongitude(); //en grados
                 double speed = location.getSpeed() * 3600 / 1000; //en km/h
+                //creamos el formato digital que queremos que tenga
                 DecimalFormat df = new DecimalFormat("000.0000000");
                 //guardamos las ultimas coordenadas en las que hemos estado
                 latitud = latitude;
                 longitud = longitude;
                 LatLng  tuLocation = new LatLng(latitud, longitud);
                 float zoomLevel = 16;
+                //movemos la camara a la posicion actual
                 if(firstTime){
-                    //float zoomLevel = 16;
-                    //LatLng  tuLocation = new LatLng(latitud, longitud);
-                    //googleMap.addMarker(new MarkerOptions().position(tuLocation).title("Current location"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(tuLocation, zoomLevel));
                     firstTime = false;
                 }else{
@@ -184,6 +190,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         };
 
+        //pedimos permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast toast = Toast.makeText(getApplicationContext(), "no permission", Toast.LENGTH_LONG);
@@ -195,7 +202,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     } // fin de readGPS
-
 
 
 
@@ -221,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(intent);
     }
 
+    //listeners de la layout
     private void listeners(){
         right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         sos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //si el usuario usa el boton de emergencia se envia un aviso manual al bot
                 TcpAviso tcp = new TcpAviso(2);
                 tcp.start();
             }
@@ -250,6 +258,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    //metodo que inicializa el component visual que muestra la bateria
+    //usamos una libreria externa
     private void bateria(){
         // Find the components
         gauge = (ScLinearGauge) this.findViewById(R.id.line);
@@ -296,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         gauge.setHighValue(75);
     }
 
-    //create new class for connect thread
+    //clase que actualiza los datos de la layout de forma paralela
     private class refreshUI extends Thread {
         ScLinearGauge gauge, gauge2;
         Meters m;

@@ -26,20 +26,21 @@ public class Main2Activity extends AppCompatActivity {
     TextClock clock;
     TextView title, title2, s0, s1, s2, s3, s4, s5, s6, s7, s8, sb0, sb1, sb2, sb3, sb4, sb5, sb6, sb7, sb8;
     Typeface type, fuente;
-
     private Main2Activity.refreshUI refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
+        //traemos referencias
         referencias();
+        //declaramos listeners
         listeners();
+        //cambiamos las fuentes
         setTypeface();
-
+        //cambiamos el context del thread de avisos
         Avisos.context = this;
-
+        //inicializamos y empezamos el thread que actualiza la layout
         refresh = new Main2Activity.refreshUI();
         refresh.start();
     }
@@ -47,8 +48,6 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        //mConnectedThread = new Main2Activity.ConnectedThread(btSocket);
-        //mConnectedThread.start();
     }
 
     @Override
@@ -78,6 +77,8 @@ public class Main2Activity extends AppCompatActivity {
         Avisos.context = null;
         startActivity(intent);
     }
+
+    //metodo que cambia la fuente de todos los textviews
     private void setTypeface(){
         type = Typeface.createFromAsset(getAssets(),"fonts/DS-DIGI.TTF");
         fuente = Typeface.createFromAsset(getAssets(), "fonts/GeosansLight.ttf");;
@@ -104,6 +105,7 @@ public class Main2Activity extends AppCompatActivity {
         clock.setTypeface(type);
     }
 
+    //referencias
     private void referencias(){
         right = (ImageButton) findViewById(R.id.cambioDe);
         left = (ImageButton) findViewById(R.id.cambioIz);
@@ -132,6 +134,7 @@ public class Main2Activity extends AppCompatActivity {
         sos = (ImageButton) findViewById(R.id.sos);
     }
 
+    //listeners del layout
     private void listeners(){
         right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +163,7 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    //create new class for connect thread
+    //clase que actualiza los datos que aparecen en la layout
     private class refreshUI extends Thread {
         Timer timer;
         public refreshUI() {

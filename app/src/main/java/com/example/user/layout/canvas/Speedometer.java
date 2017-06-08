@@ -20,12 +20,12 @@ import com.example.user.layout.sensors.motionsensors;
 
 public class Speedometer extends View implements SpeedChangeListener {
 	private static final String TAG = Speedometer.class.getSimpleName();
-	public static final float DEFAULT_MAX_SPEED = 200; // Assuming this is km/h and you drive a super-car
+	public static final float DEFAULT_MAX_SPEED = 200;
 	Typeface type, type2;
 	float maxSpeed = 0, avgSpeed = 60;
 
 
-	// Speedometer internal state
+	// estado interno del Speedometer
 	private float mMaxSpeed;
 	private float mCurrentSpeed;
 	private float currentBattery;
@@ -33,7 +33,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private float mCurrentMotorTemp;
 
 	
-	// Scale drawing tools
+	//drawing tools
 	private Paint onMarkPaint;
 	private Paint offMarkPaint;
 	private Paint scalePaint;
@@ -47,10 +47,8 @@ public class Speedometer extends View implements SpeedChangeListener {
 	final RectF oval3 = new RectF();
 	final RectF oval4 = new RectF();
 
-	
-	// Drawing colors
 
-	//private int ON_COLOR = Color.argb(255, 0xff, 0xA5, 0x00);
+	//colores
 	private int ON_COLOR = Color.argb(255, 191, 187, 107);
 	private int OFF_COLOR = Color.argb(255,0x3e,0x3e,0x3e);
 	private int SCALE_COLOR = Color.argb(255, 255, 255, 255);
@@ -60,25 +58,30 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private float SCALE_SIZE = 60f;
 	private float READING_SIZE = 60f;
 	
-	// Scale configuration
+	//comfiguracion de escala
 	private float centerX;
 	private float centerY;
 	private float radius;
 	Matrix  mMatrix = new Matrix();
 	Matrix  mMatrix2 = new Matrix();
 
+	//bitmap de las imagenes de rotacion
 	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bikepos);
 	Bitmap mBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.bikeposf);
 
+	//constructor vacio
 	public Speedometer(Context context){
 		super(context);
 	}
-	
+
+	//constructor
 	public Speedometer(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		TypedArray a = context.getTheme().obtainStyledAttributes(attrs, 
+		//cramos typed array a base de el stylable que hemos declarado en attrs
+		TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.Speedometer, 
 				0, 0);
+		//importamos las opciones del stylable correspondiente a este cnavas
 		try{
 			mMaxSpeed = a.getFloat(R.styleable.Speedometer_maxSpeed, DEFAULT_MAX_SPEED);
 			mCurrentSpeed = a.getFloat(R.styleable.Speedometer_currentSpeed, 0);
@@ -91,11 +94,13 @@ public class Speedometer extends View implements SpeedChangeListener {
 		} finally{
 			a.recycle();
 		}
+		//inicializamos lo necesario para dibujar
 		initDrawingTools();
+		//inicializamos las fuentes
 		type = Typeface.createFromAsset(context.getAssets(),"fonts/DS-DIGI.TTF");
 		type2 = Typeface.createFromAsset(context.getAssets(),"fonts/GeosansLight.ttf");
 	}
-	
+	//metodo que inicializa lo necesario para dibujar con cada pintura correspondiente
 	private void initDrawingTools(){
 		onMarkPaint = new Paint();
 		onMarkPaint.setStyle(Paint.Style.STROKE);
@@ -137,11 +142,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 		onPath = new Path();
 		offPath = new Path();
 	}
-	
+
+	//metodo que devuelve la velocidad actual
 	public float getCurrentSpeed() {
 		return mCurrentSpeed;
 	}
 
+
+	//metodo que se encarga de guardar la velocidad actual
 	public void setCurrentSpeed(float mCurrentSpeed) {
 		if(mCurrentSpeed > this.mMaxSpeed)
 			this.mCurrentSpeed = mMaxSpeed;
@@ -151,10 +159,12 @@ public class Speedometer extends View implements SpeedChangeListener {
 			this.mCurrentSpeed = mCurrentSpeed;
 	}
 
+	//metodo que devuelve la bateria actual
 	public float getCurrentBattery() {
 		return currentBattery;
 	}
 
+	//metodo que se encarga de guardar la bateria actual
 	public void setCurrentBattery(float mCurrentBattery) {
 		if(mCurrentBattery > this.mMaxSpeed)
 			this.currentBattery = mMaxSpeed;
@@ -163,28 +173,33 @@ public class Speedometer extends View implements SpeedChangeListener {
 		else
 			this.currentBattery = mCurrentBattery;
 	}
+	//metodo que se encarga de guardar la temp de la bateria actual
 	public void setCurrentBatteryTemp(float mCurrentBatteryTemp) {
 		this.mCurrentBatteryTemp = mCurrentBatteryTemp;
 	}
+	//metodo que se encarga de guardar la temp del motor actual
 	public void setCurrentMotorTemp(float mCurrentMotorTemp) {
 		this.mCurrentMotorTemp = mCurrentMotorTemp;
 	}
-	
+
+	//metodo que crear el ovalo del arean en la que el arco se va a dibujar
 	@Override
 	protected void onSizeChanged(int width, int height, int oldw, int oldh) {
-		
-		// Setting up the oval area in which the arc will be drawn
+		//ajustamos radio
 		if (width > height){
 			radius = height/3;
 		}else{
 			radius = width/3;
 		}
+
+		//limetes y medidas de los ovalos
 		oval.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
 		oval2.set(30, 30, 460, 460);
 		oval3.set(1220, 20, 1520, 320);
 		oval4.set(1530, 240, 1830, 540);
 	}
-	
+
+	//metodo que crea y encuentra el centro del canvas donde va la circumferencia dibujada
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -201,7 +216,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		centerY = chosenDimension / 2;
 		setMeasuredDimension(chosenDimension, chosenDimension);
 	}
-	
+	//metodo que elege que dimensiones se van a usar
 	private int chooseDimension(int mode, int size) {
 		if (mode == MeasureSpec.AT_MOST || mode == MeasureSpec.EXACTLY) {
 			return size;
@@ -209,14 +224,14 @@ public class Speedometer extends View implements SpeedChangeListener {
 			return getPreferredSize();
 		} 
 	}
-	// in case there is no size specified
+	//si no existe ningun tamaño por defectop
 	private int getPreferredSize() {
 		return 300;
 	}
-	
+
+	//metodo que dibuja el canvas cada frame
 	@Override
 	public void onDraw(Canvas canvas){
-		//canvas.drawColor(Color.BLUE);
 		MeasureVel();
 		//velocity
 		drawScaleBackground(canvas);
@@ -238,6 +253,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		//info
 		drawInfo(canvas);
 
+		//dibujamos los indicadores de inclinacion frontal y lateral
 		mMatrix.setRotate (motionsensors.pitch+37, mBitmap.getWidth()/2, mBitmap.getHeight()/2);
 		mMatrix.postTranslate(1650, 760);
 		canvas.drawBitmap(mBitmap, mMatrix, null);
@@ -253,6 +269,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	 * Draws the segments in their OFF state
 	 * @param canvas
 	 */
+	//dibujar el fondo de el medidor de velocidad
 	private void drawScaleBackground(Canvas canvas){
 		offPath.reset();
 		for(int i = -180; i < 0; i+=4){
@@ -266,7 +283,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 			canvas.drawPath(offPath, offMarkPaint);
 		}
 	}
-	
+	//dibujar la escala del medidor de velocidad
 	private void drawScale(Canvas canvas){
 		onPath.reset();
 		for(int i = -180; i <= (mCurrentSpeed/mMaxSpeed)*180 - 180; i+=4){
@@ -274,7 +291,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		}
 		canvas.drawPath(onPath, onMarkPaint);
 	}
-	
+	//dibujar la leyenda del medidor de velocidad
 	private void drawLegend(Canvas canvas){
 		canvas.save(Canvas.MATRIX_SAVE_FLAG);
 		canvas.rotate(-180, centerX,centerY);
@@ -291,7 +308,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 								scalePaint);}
 		canvas.restore();
 	}
-	
+	//dibujar el texto del medidor de velocidad
 	private void drawReading(Canvas canvas){
 		String message = String.format("%d", (int)this.mCurrentSpeed);
 		readingPaint.setTextSize(300);
@@ -306,6 +323,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		canvas.drawText("AVG: "+Math.round(avgSpeed), 420, 820, readingPaint);
 	}
 
+	//metodos que actualizan los valores a mostrar
 	@Override
 	public void onSpeedChanged(float newSpeedValue) {
 		this.setCurrentSpeed(newSpeedValue);
@@ -327,6 +345,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		this.invalidate();
 	}
 
+	//dibujar el fondo de el medidor de la bateria
 	private void drawScaleBackground2(Canvas canvas){
 		offPath.reset();
 		for(int i = -360; i < 0; i+=4){
@@ -335,7 +354,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		offMarkPaint.setColor(OFF_COLOR);
 		canvas.drawPath(offPath, offMarkPaint);
 	}
-
+	//dibujar la escala del medidor de la bateria
 	private void drawScale2(Canvas canvas){
 		onPath.reset();
 		for(int i = -360; i <= ((currentBattery*2)/mMaxSpeed)*360 - 360; i+=4){
@@ -353,7 +372,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 			canvas.drawPath(onPath, batPaint);
 		}
 	}
-
+	//dibujar el texto del medidor de la bateria
 	private void drawReading2(Canvas canvas) {
 		String message = String.format("%d", (int) this.currentBattery);
 		readingPaint.setTextSize(150);
@@ -365,7 +384,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		canvas.drawText("Bike Battery", 110, 180, readingPaint);
 
 	}
-
+	//dibujar la info adicional
 	private void drawInfo(Canvas canvas){
 		smallScale.setTextSize(40);
 		smallScale.setTypeface(type2);
@@ -375,6 +394,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		canvas.drawText("PA: "+Bluetooth.s3+"Hpa", 0, 900, smallScale);
 	}
 
+	//dibujar el fondo de temp de motor
 	private void drawScaleBackground3(Canvas canvas){
 		offPath.reset();
 		for(int i = -360; i < 0; i+=4){
@@ -383,7 +403,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		offMarkPaint.setColor(OFF_COLOR);
 		canvas.drawPath(offPath, offMarkPaint);
 	}
-
+	//dibujar la escala de temp de motor
 	private void drawScale3(Canvas canvas){
 		onPath.reset();
 		for(int i = -360; i <= ((mCurrentBatteryTemp*2)/mMaxSpeed)*360 - 360; i+=4){
@@ -401,6 +421,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 			canvas.drawPath(onPath, batPaint);
 		}
 	}
+	//dibujar el texto de temp de motor
 	private void drawReading3(Canvas canvas){
 		String message = String.format("%d", (int)this.mCurrentMotorTemp);
 		readingPaint.setTextSize(100);
@@ -410,7 +431,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		readingPaint.setTextSize(30);
 		canvas.drawText("Motor Temp", 1610, 340, readingPaint);
 	}
-
+	//dibujar el fondo de temp de bateria
 	private void drawScaleBackground4(Canvas canvas){
 		offPath.reset();
 		for(int i = -360; i < 0; i+=4){
@@ -419,7 +440,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		offMarkPaint.setColor(OFF_COLOR);
 		canvas.drawPath(offPath, offMarkPaint);
 	}
-
+	//dibujar la escala de temp de bateria
 	private void drawScale4(Canvas canvas){
 		onPath.reset();
 		for(int i = -360; i <= ((mCurrentMotorTemp)*2/mMaxSpeed)*360 - 360; i+=4){
@@ -437,6 +458,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 			canvas.drawPath(onPath, batPaint);
 		}
 	}
+	//dibujar el texto de temp de bateria
 	private void drawReading4(Canvas canvas){
 		String message = String.format("%d", (int)this.mCurrentBatteryTemp);
 		readingPaint.setTextSize(100);
@@ -446,7 +468,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 		readingPaint.setTextSize(30);
 		canvas.drawText("Battery temp", 1290, 120, readingPaint);
 	}
-
+	//mesuramos velocidad
 	private void MeasureVel(){
 		if(maxSpeed < mCurrentSpeed){
 			maxSpeed = mCurrentSpeed;
