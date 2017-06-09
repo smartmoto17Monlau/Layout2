@@ -64,9 +64,13 @@ public class bbdd  extends Thread{
         String date = getCurrentDate();
         System.out.println(date);
         String query = "INSERT INTO public.data("
-                + "motoid, speed, maxspeed, avgspeed, battery, motortemp, batterytemp, latitude, longitude, frontalrotation, siderotation, glp, propane, naturalgas, co, butane, hydrogen, methane, co2, amonia, rad, temp, hum, height, pa, fecha) "
-                + "VALUES (1, "+Bluetooth.s14+", "+Bluetooth.max+", 60, "+Bluetooth.s13+", "+Bluetooth.s15+", "+Bluetooth.s16+", "+ LocationFollow.latitud+", "+ LocationFollow.longitud+", "+ motionsensors.azimuth+","+motionsensors.pitch+"," +
-                " "+Bluetooth.s4+", "+Bluetooth.s5+", "+Bluetooth.s6+", "+Bluetooth.s8+", "+Bluetooth.s7+", "+Bluetooth.s9+", "+Bluetooth.s10+", "+Bluetooth.s11+", 0, "+Bluetooth.s12+", "+Bluetooth.s0+", "+Bluetooth.s1+", "+Bluetooth.s3+", "+Bluetooth.s2+", '"+date+"');";
+                + "motoid, speed, maxspeed, avgspeed, battery, motortemp, batterytemp, latitude, longitude, frontalrotation" +
+                ", siderotation, glp, propane, naturalgas, co, butane, hydrogen, methane, co2, amonia, rad, temp, hum, height" +
+                ", pa, fecha) VALUES (1, "+Bluetooth.s14+", "+Bluetooth.max+", 60, "+Bluetooth.s13+", "+Bluetooth.s15+"," +
+                " "+Bluetooth.s16+", "+ LocationFollow.latitud+", "+ LocationFollow.longitud+", "+ motionsensors.azimuth+"," +
+                ""+motionsensors.pitch+","+Bluetooth.s4+", "+Bluetooth.s5+", "+Bluetooth.s6+", "+Bluetooth.s8+", "+Bluetooth.s7+"" +
+                ", "+Bluetooth.s9+", "+Bluetooth.s10+", "+Bluetooth.s11+", 0, "+Bluetooth.s12+", "+Bluetooth.s0+", "+Bluetooth.s1+"," +
+                " "+Bluetooth.s3+", "+Bluetooth.s2+", '"+date+"');";
         stmt.executeUpdate(query);
         stmt.close();
         c.commit();
