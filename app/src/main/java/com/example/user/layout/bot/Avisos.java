@@ -154,7 +154,7 @@ public class Avisos extends Thread {
     private void alertaCaida(){
         final AlertDialog alert = new AlertDialog.Builder(context)
                 .setTitle("Are you ok ? ")
-                .setMessage("We detected you position in space is wrong are you ok ?")
+                .setMessage("We detected your position in space is wrong are you ok ?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //si el usuario responde afirmativamente se hace reset de booleanos de control

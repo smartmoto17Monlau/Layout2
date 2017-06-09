@@ -18,7 +18,7 @@ import java.util.Timer;
  */
 
 public class Marquee extends View {
-
+    //variables globales
     private Timer timer=null ;
     private MyTimerTask task;
     private int interval = 20;
@@ -32,33 +32,40 @@ public class Marquee extends View {
     int borde = -400;
     int inicio = 2030;
 
+    //constructor vacio
     public Marquee(Context context) {
         super(context);
     }
 
-
+    //constructor de Marquee
     public Marquee(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        //guardamos en un typedArray los datos que hemos declarado en el stylable del archivo attrs.xml
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.Marquee, 0, 0);
+        //inicializamos la fuente
         type = Typeface.createFromAsset(context.getAssets(),"fonts/GeosansLight.ttf");
 
+        //aplicamos opciones de dibujado a la pintura
         p.setTypeface(type);
         p.setAntiAlias(true);
         p.setColor(textColor);
         p.setTextSize(80);
 
+        //establecemos las pociciones iniciales de estos puntos
         pos1x = 10;
         pos2x = pos1x+450;
         pos3x = pos2x+400;
         pos4x = pos3x+500;
-
         pos5x = pos4x+450;
+
+        //empezamos timer de la animacion
         startTimer();
     }
 
-    @Override
+    @Override //metodo que dibuja la animacion en pantalla
     public void onDraw(Canvas canvas){
+        //dibujamos texto en scroll lateral en sus posiciones correspondientes
         canvas.drawText("Temp: "+ Bluetooth.s0+"ºC", pos1x, 80, p);
         canvas.drawText("Hum: "+Bluetooth.s1+"%", pos2x, 80, p);
         canvas.drawText("PA: "+Bluetooth.s2+"HPa", pos3x, 80, p);
@@ -67,13 +74,14 @@ public class Marquee extends View {
         this.invalidate();
     }
 
-
+    //metodo que se ejecuta cada vez que el timer se reinicia
     public void taskTimer(){
         mover();
         reposicionar();
         this.invalidate();
     }
 
+    //actualizamos los datos de posicion
     private void mover(){
         pos1x -= 1;
         pos2x -= 1;
@@ -82,6 +90,7 @@ public class Marquee extends View {
         pos5x -= 1;
     }
 
+    //reposicionamiento de los textos para que giren en bucle
     private void reposicionar(){
         if(pos1x < borde){
             pos1x = inicio;
@@ -100,12 +109,13 @@ public class Marquee extends View {
         }
     }
 
-
+    //metodo que empieza el timer a 20ms de intervalo refresco
     private void startTimer(){
         task=new MyTimerTask(this);
         timer= new Timer("miTimer");
         timer.schedule(task, 0, interval);
     }
+    //metodo para parar el timer
     private void stopTimer(){
         timer.cancel();
         timer=null; task=null;

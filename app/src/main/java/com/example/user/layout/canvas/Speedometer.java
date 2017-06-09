@@ -220,7 +220,7 @@ public class Speedometer extends View implements SpeedChangeListener {
 	private int chooseDimension(int mode, int size) {
 		if (mode == MeasureSpec.AT_MOST || mode == MeasureSpec.EXACTLY) {
 			return size;
-		} else { // (mode == MeasureSpec.UNSPECIFIED)
+		} else {
 			return getPreferredSize();
 		} 
 	}

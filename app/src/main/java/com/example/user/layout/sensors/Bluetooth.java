@@ -25,12 +25,11 @@ import static android.content.Context.SENSOR_SERVICE;
 
 public class Bluetooth extends Thread {
 
+    //variables globales
     ArrayList<String> currentSensorValue;
     char[] arrayLetras;
-
     Handler bluetoothIn;
     BluetoothDevice device;
-
     final int handlerState = 0;
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
@@ -40,15 +39,12 @@ public class Bluetooth extends Thread {
     private Sensor gyro = null;
     Context mContext;
     private bbdd db;
-
-
     private InputStream mmInStream;
-    //private OutputStream mmOutStream;
 
-    // SPP UUID service - this should work for most devices
+    // SPP UUID service - Este UUID deberia funcionar en la mayoria de dispositivos
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // String for MAC address
+    // String de la  MAC address
     private static String address;
 
     //variables globales de sensores
@@ -56,16 +52,21 @@ public class Bluetooth extends Thread {
     public static float max = 0;
     public static  boolean isbtOn = false;
 
+    //constructor de Bluetooth
     public Bluetooth(String address, Context mContext) throws SQLException, ClassNotFoundException {
         this.address = address;
         this.mContext = mContext;
-        //iniciamos bluetooth socket
+
+        //iniciamos bluetooth socket y el handler
         init();
 
+        //inicializamos motionsensors y empezamos a medir
         mtsensors = new motionsensors();
         StartSensor();
 
+        //inicializamos LocationFollow y empezamos a medir
         LocationFollow loc = new LocationFollow(mContext);
+        //inicializamos la clase que gestiona la BBDD y la iniciamos
         try{
             db = new bbdd();
             db.start();
@@ -73,26 +74,33 @@ public class Bluetooth extends Thread {
             e.printStackTrace();
         }
     }
+    //constructor vacio
     public Bluetooth(){
     }
 
+    //metodo que empieza a registrar el valor de los sensores de la clase motionsensors
     private void StartSensor(){
         sensorManager = (SensorManager) mContext.getSystemService(SENSOR_SERVICE);
+        //usamos el sensor de tipo Rotation Vector
         gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
+    //metodo que inicaliza la conexion Bt y crea el handler que gestiona la recepcion de los datos
     private void init(){
+        //declaramos un handler para que gestione el guardado de los valores recibidos en
+        //su correspondiente variable
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
+                if (msg.what == handlerState) {                                         //si el mensage es lo que queremos
+                    String readMessage = (String) msg.obj;                              // msg.arg1 = bytes del thread conectado
+                    recDataString.append(readMessage);                                  //hacemos append hasta que encuentra ~
+                    int endOfLineIndex = recDataString.indexOf("~");                    // determinamos el endOfLine
+                    if (endOfLineIndex > 0) {                                           // nos aseguramos que recibimos datos antes del ~
+                        String dataInPrint = recDataString.substring(0, endOfLineIndex);// extraemos string
+                        int dataLength = dataInPrint.length();                          //guardamos el tamaño de los datos recibidos
 
-                if (msg.what == handlerState) {                                     //if message is what we want
-                    String readMessage = (String) msg.obj;                              // msg.arg1 = bytes from connect thread
-                    recDataString.append(readMessage);                                      //keep appending to string until ~
-                    int endOfLineIndex = recDataString.indexOf("~");                    // determine the end-of-line
-                    if (endOfLineIndex > 0) {                                           // make sure there data before ~
-                        String dataInPrint = recDataString.substring(0, endOfLineIndex);    // extract string
-                        int dataLength = dataInPrint.length();                          //get length of data received
-
+                        //variables intermedias que almacenaras temporalmente el valor recibido
+                        //que corresponde a cada variable
                         String sensor0 = "";
                         String sensor1 = "";
                         String sensor2 = "";
@@ -111,113 +119,96 @@ public class Bluetooth extends Thread {
                         String sensor15 = "";
                         String sensor16 = "";
 
-                        if (recDataString.charAt(0) == '#')       //if it starts with # we know it is what we are looking for
+                        if (recDataString.charAt(0) == '#')  //si empieza por # sabemos que es lo que estamos buscando
                         {
-                            int currentSensor = 0;
-                            arrayLetras = dataInPrint.toCharArray();
-                            currentSensorValue = new ArrayList<>();
-                            for(int i = 0 ; i < dataLength;i++){
-                                if(arrayLetras[i] == '#'){
+                            int currentSensor = 0;  //creamos un cursor
+                            arrayLetras = dataInPrint.toCharArray(); //guardamos todos los chars del mesage recibido en un array de chars
+                            currentSensorValue = new ArrayList<>(); //arraylist que guarda temporalment los  chars de cada sensor
 
-                                }else if(arrayLetras[i] == '+'){
-                                    if(currentSensor == 0){
-                                        sensor0 = sacarString(currentSensorValue);
-                                        currentSensorValue.clear();
-                                        currentSensor++;
-                                        //Log.d("0"," ");
+                            for(int i = 0 ; i < dataLength;i++){ //bucle que itera el array de chars
+                                if(arrayLetras[i] == '#'){       //si el char es # no hacemos nada
+
+                                }else if(arrayLetras[i] == '+'){ //si el char es un +, significa que hemos llegado al final del valor
+                                    if(currentSensor == 0){      //y guardamos los chars que estan el arraylist temporal en su variable correspontiente
+                                        sensor0 = sacarString(currentSensorValue); //generamos un String a partir del arraylist que almacena los datos temporales
+                                        currentSensorValue.clear(); //borramos los datos temporales
+                                        currentSensor++; //aumentamos el cursor de el sensor para que se guarde en la siguiente variablke
                                     }else if(currentSensor == 1){
                                         sensor1 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("1"," ");
                                     }else if (currentSensor == 2){
                                         sensor2 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("2"," ");
                                     }else if (currentSensor == 3){
                                         sensor3 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("3"," ");
                                     }else if (currentSensor == 4){
                                         sensor4 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("4"," ");
                                     }else if (currentSensor == 5){
                                         sensor5 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                       //Log.d("5"," ");
                                     }else if (currentSensor == 6){
                                         sensor6 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("6"," ");
                                     }else if (currentSensor == 7){
                                         sensor7 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("7"," ");
                                     }else if (currentSensor == 8){
                                         sensor8 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("8"," ");
                                     }else if (currentSensor == 9){
                                         sensor9 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("9"," ");
-                                    }
-                                    else if (currentSensor == 10){
+                                    }else if (currentSensor == 10){
                                         sensor10 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("10"," ");
-                                    }
-                                    else if (currentSensor == 11){
+                                    }else if (currentSensor == 11){
                                         sensor11 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("11"," ");
-                                    }
-                                    else if (currentSensor == 12){
+                                    }else if (currentSensor == 12){
                                         sensor12 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("12"," ");
-                                    }
-                                    else if (currentSensor == 13){
+                                    }else if (currentSensor == 13){
                                         sensor13 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("13"," ");
-                                    }
-                                    else if (currentSensor == 14){
+                                    }else if (currentSensor == 14){
                                         sensor14 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("14"," ");
                                     }else if (currentSensor == 15){
                                         sensor15 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         currentSensor++;
-                                        //Log.d("14"," ");
                                     }else if (currentSensor == 16){
                                         sensor16 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
+                                        // como hemos llegado a la ultima variable, volvemos a empezar el bucle de guardado
                                         currentSensor = 0;
-                                        //Log.d("14"," ");
                                     }
-                                }else if(arrayLetras[i] == '~'){
+                                }else if(arrayLetras[i] == '~'){ //si el char es ~, finalizamos el bucle d eguardado
                                     currentSensor = 0;
                                     break;
                                 }else{
+                                    // si ninguno de los casos anteriores se cumple, el char es una letra normal
+                                    // y la añadimos al arraylist de chars temprales
                                     currentSensorValue.add(String.valueOf(arrayLetras[i]));
                                 }
                             }
+                            //guardamos los valores que hemos recibido en esta trama en las variables globales del programa
                             s0 = sensor0;
                             s1 = sensor1;
                             s2 = sensor2;
@@ -236,38 +227,36 @@ public class Bluetooth extends Thread {
                             s15 = sensor15;
                             s16 = sensor16;
                         }
-                        recDataString.delete(0, recDataString.length());   //clear all string data
+                        recDataString.delete(0, recDataString.length());   //borramos los datos que hemos recibido
                     }
                 }
             }
         };
 
-        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
-        //create device and set the MAC address
+        btAdapter = BluetoothAdapter.getDefaultAdapter(); // get Bluetooth adapter
+        //creamos device y le asignamos una MAC adress
         device = btAdapter.getRemoteDevice(address);
 
-        try {
+        try { //creamos el BluetoothSocket a partir del device
             btSocket = createBluetoothSocket(device);
         } catch (IOException e) {
-            //Toast.makeText(getBaseContext(), "Socket creation failed", Toast.LENGTH_LONG).show();
         }
-        // Establish the Bluetooth socket connection.
-        try
-        {
+
+        // Establecemos conexion con elbluetooth socket
+        try {
             btSocket.connect();
         } catch (IOException e) {
-            try
-            {
+            try {
+                //si no podemos conectar, cerramos el socket
                 btSocket.close();
-            } catch (IOException e2)
-            {
-                //insert code to deal with this
+            } catch (IOException e2){
             }
         }
-        getInputSocket(btSocket);
+        getInputSocket(btSocket); //accedemos al input socket del socket que hemos creado
 
     }
 
+    //metodo que recibe un arraylist y devuelve un string con los chars que tenia almacenados
     private String sacarString(ArrayList<String> arraylist){
         String texto = "";
         for (String letra : arraylist) {
@@ -276,43 +265,44 @@ public class Bluetooth extends Thread {
         return texto;
     }
 
+    //metodo que crea el bluetooth socket al recivir el device
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 
         return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
-        //creates secure outgoing connecetion with BT device using UUID
+        //crea una conexion segura con el BT usando el UUID
     }
 
+    //inicio del run
     public void run(){
+        //creamos un array de bytes para hacer de buffer
         byte[] buffer = new byte[256];
         int bytes;
 
+        //registramos los sensores de motionsensors
         sensorManager.registerListener(mtsensors, gyro, SensorManager.SENSOR_DELAY_UI);
 
-        // Keep looping to listen for received messages
+        // Bucle infinito que va recibiendo los mensages entrantes
         while (true) {
             try {
-                bytes = mmInStream.read(buffer);            //read bytes from input buffer
+                bytes = mmInStream.read(buffer);   //leemos los bytes del input buffer
                 String readMessage = new String(buffer, 0, bytes);
-                // Send the obtained bytes to the UI Activity via handler
+                // Enviamos los bytes obtenidos a la UI usando un handler
                 bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
-
-                Log.d("Datos Arduino","kkk "+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11+ " "+s12+ " "+s13+ " "+s14+ " "+s15+" "+s16);
+                //Log.d("Datos Arduino","listado de datos"+s0+ " "+s1+" "+s2+" "+s3+" "+s4+ " "+ s5+" "+s6+ " "+ s7+ " "+ s8+ " "+ s9+ " "+ s10+ " "+ s11+ " "+s12+ " "+s13+ " "+s14+ " "+s15+" "+s16);
             } catch (IOException e) {
                 break;
             }
         }
     }
 
+    //metodo que
     private void getInputSocket(BluetoothSocket socket){
         InputStream tmpIn = null;
-        //OutputStream tmpOut = null;
         try {
-            //Create I/O streams for connection
+            //Creamos I/O stream para las conexiones
             tmpIn = socket.getInputStream();
-            //tmpOut = socket.getOutputStream();
         } catch (IOException e) { }
-
+        //guardamos el inputStream obtenido en una variable global
         mmInStream = tmpIn;
-        //mmOutStream = tmpOut;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.user.layout.sensors;
 
-import android.*;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -8,19 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.DecimalFormat;
 
@@ -28,22 +15,23 @@ import static android.content.Context.LOCATION_SERVICE;
 
 public class LocationFollow {
 
-    private Context context;
     //variables globales
     public static double latitud = 0, longitud = 0;
-    private boolean firstTime = true;
+    private Context context;
 
+    //cosntructor de LocationFollow
     public LocationFollow(Context context) {
+        //recibe context y empieza a leer del GPS sus valores
         this.context = context;
         readGPS();
     }
 
     private void readGPS() {
+        //inicializamos locationManager y su listener
         LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-
-                double altitude = location.getAltitude(); //en metros
+                //extraemos la variables que nos interesa
                 double latitude = location.getLatitude(); //en grados
                 double longitude = location.getLongitude(); //en grados
                 double speed = location.getSpeed() * 3600 / 1000; //en km/h
@@ -51,7 +39,7 @@ public class LocationFollow {
                 //guardamos las ultimas coordenadas en las que hemos estado
                 latitud = latitude;
                 longitud = longitude;
-                Log.i("GPS", "Latitud:" +latitud+", Longitud "+ longitud);
+                //Log.i("GPS", "Latitud:" +latitud+", Longitud "+ longitud);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -65,6 +53,7 @@ public class LocationFollow {
             }
         };
 
+        //comprobamos si se dispone de permisos para usar el GPS
         if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -75,6 +64,7 @@ public class LocationFollow {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        //empezamos a pedir datos de posicion a locationManager desde GPS o Internet
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 1, locationListener);    } // fin de readGPS
 }
