@@ -48,7 +48,7 @@ public class Bluetooth extends Thread {
     private static String address;
 
     //variables globales de sensores
-    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16;
+    public  static String s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, ready;
     public static float max = 0;
     public static  boolean isbtOn = false;
 
@@ -118,6 +118,7 @@ public class Bluetooth extends Thread {
                         String sensor14 = "";
                         String sensor15 = "";
                         String sensor16 = "";
+                        String rdy = "";
 
                         if (recDataString.charAt(0) == '#')  //si empieza por # sabemos que es lo que estamos buscando
                         {
@@ -197,6 +198,11 @@ public class Bluetooth extends Thread {
                                         sensor16 = sacarString(currentSensorValue);
                                         currentSensorValue.clear();
                                         // como hemos llegado a la ultima variable, volvemos a empezar el bucle de guardado
+                                        currentSensor++;
+                                    }else if (currentSensor == 17){
+                                        rdy = sacarString(currentSensorValue);
+                                        currentSensorValue.clear();
+                                        // como hemos llegado a la ultima variable, volvemos a empezar el bucle de guardado
                                         currentSensor = 0;
                                     }
                                 }else if(arrayLetras[i] == '~'){ //si el char es ~, finalizamos el bucle d eguardado
@@ -226,6 +232,7 @@ public class Bluetooth extends Thread {
                             s14 = sensor14;
                             s15 = sensor15;
                             s16 = sensor16;
+                            ready = rdy;
                         }
                         recDataString.delete(0, recDataString.length());   //borramos los datos que hemos recibido
                     }
